@@ -1,5 +1,8 @@
 import { Router } from 'express'
+import { retrievePosterController } from '../controllers/posters.controller'
 
-const portersRoutes: Router = Router()
+const postersRoutes: Router = Router()
 
-export default portersRoutes
+postersRoutes.get("/:id", retrievePosterController)
+
+export default postersRoutes

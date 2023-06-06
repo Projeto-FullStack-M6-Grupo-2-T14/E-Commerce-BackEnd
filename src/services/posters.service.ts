@@ -1,13 +1,13 @@
+import { Repository } from 'typeorm'
 import { AppDataSource } from '../data-source'
 import { Poster } from '../entities/index'
 import { AppError } from '../error'
-import { } from '../interfaces'
-import { } from '../schemas'
+import { iEntryPoster, iExitPoster } from '../interfaces/posters.interface'
 
-const createScheduleService = async (scheduleData: iRequestCreateScheduleWidthUserId): Promise<iResultCreateSchedule> => {
+const createScheduleService = async (scheduleData: iEntryPoster): Promise<iExitPoster> => {
     const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster)
     
-    return;
+    return
 }
 
 export default createScheduleService
