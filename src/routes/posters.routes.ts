@@ -1,8 +1,12 @@
-import { Router } from 'express'
-import { retrievePosterController } from '../controllers/posters.controller'
+import { Router } from "express";
+import {
+	createPosterController,
+	retrievePosterController,
+} from "../controllers/posters.controller";
 
-const postersRoutes: Router = Router()
+const postersRoutes: Router = Router();
 
-postersRoutes.get("/:id", retrievePosterController)
+postersRoutes.get("/:id", retrievePosterController);
+postersRoutes.post("", createPosterController);
 
-export default postersRoutes
+export default postersRoutes;
