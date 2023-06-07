@@ -3,7 +3,7 @@ import "express-async-errors";
 import express, { Application } from "express";
 import cors from "cors"
 import { errorHandler } from "./error";
-import postersRoutes from "./routes/porters.routes"
+import postersRoutes from "./routes/posters.routes"
 
 const app: Application = express();
 app.use(express.json());
