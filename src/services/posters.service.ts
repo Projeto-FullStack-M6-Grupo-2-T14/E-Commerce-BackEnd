@@ -3,7 +3,7 @@ import { AppDataSource } from '../data-source'
 import { Poster } from '../entities/index'
 import { AppError } from '../error'
 import { } from '../interfaces'
-import { iEntryPoster, iEntryUpdatePoster, iExitPoster } from '../interfaces/posters.interface'
+import {  iUpdatePoster, iExitPoster } from '../interfaces/posters.interface'
 import { } from '../schemas'
 import { exitPosterSchema } from '../schemas/posters.schema'
 
@@ -13,7 +13,7 @@ const createScheduleService = async (scheduleData: iRequestCreateScheduleWidthUs
     return;
 }
 
-const updatePosterService = async (posterData: iEntryUpdatePoster, posterId: number): Promise<iExitPoster> => {
+const updatePosterService = async (posterData: any, posterId: number): Promise<iExitPoster> => {
     const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster)
     const poster: Poster | null = await posterRepository.findOneBy({
         id: posterId

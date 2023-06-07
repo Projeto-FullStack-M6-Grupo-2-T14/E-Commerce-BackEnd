@@ -9,11 +9,11 @@ const createPosterController = async (req: Request, res: Response): Promise<Resp
     return res.status(201).json(newCategory)
 }
 
-const updatePoster = async (req: Request, res: Response): Promise<Response> => {
+const updatePosterController = async (req: Request, res: Response): Promise<Response> => {
     const newPosterData: iEntryPoster = req.body
     const posterId: number = res.locals.id
     const updatedPoster: iExitPoster = await updatePosterService(newPosterData, posterId)
-    return res.status(200).json({updatePoster})
+    return res.status(200).json(updatedPoster)
 }
 
-export{ createPosterController }
+export{ createPosterController, updatePosterController }
