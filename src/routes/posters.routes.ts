@@ -1,5 +1,9 @@
 import { Router } from 'express'
+import { updatePosterController } from '../controllers/posters.controller'
 
-const portersRoutes: Router = Router()
+const postersRoutes: Router = Router()
 
-export default portersRoutes
+postersRoutes.patch('/:id', updatePosterController)
+
+
+export default postersRoutes
