@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import listAllPostersService from "../services/posters/retrieveAllPosters.service";
-import { iEntryPoster, iExitPoster } from "../interfaces/posters.interface";
+import { iEntryPoster, iExitPoster, iListPosters } from "../interfaces/posters.interface";
 import { deletePostersService } from "../services/posters/deletePoster.service";
 import { retrievePosterServices } from "../services/posters/retrievePoster.service";
 import { createPosterServices } from "../services/posters/createPoster.service";
 import updatePosterService from "../services/posters/updatePoster.service";
 
+
 const listAllPostersController = async (req: Request, res: Response): Promise<Response> => {
-  const getPosters: iExitPoster = await listAllPostersService();
+  const getPosters: iListPosters = await listAllPostersService();
 
   return res.status(200).json(getPosters);
 };
@@ -19,7 +20,7 @@ const retrievePosterController = async (req: Request, res: Response): Promise<Re
   return res.status(200).json(poster);
 };
 
-const deletePostersController = async (req: Request, res: Response) => {
+const deletePostersController = async (req: Request, res: Response): Promise<Response> => {
   const posterId = req.params.id;
   await deletePostersService(Number(posterId));
 
