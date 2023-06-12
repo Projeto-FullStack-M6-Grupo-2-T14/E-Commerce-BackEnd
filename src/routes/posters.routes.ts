@@ -1,5 +1,11 @@
 import { Router } from 'express'
-import { listAllPostersController, deletePostersController, retrievePosterController, createPosterController, updatePosterController } from '../controllers/posters.controllers'
+import { 
+    listAllPostersController, 
+    deletePostersController, 
+    retrievePosterController, 
+    createPosterController, 
+    updatePosterController 
+} from '../controllers/posters.controllers'
 
 const postersRoutes: Router = Router()
 
