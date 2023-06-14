@@ -6,13 +6,15 @@ import {
     createPosterController, 
     updatePosterController 
 } from '../controllers/posters.controllers'
+import validateData from '../middlewares/validateData.middleware'
+import { entryPosterSchema } from '../schemas/posters.schema'
 
 const postersRoutes: Router = Router()
 
 postersRoutes.get('', listAllPostersController)
 postersRoutes.get('/:id', retrievePosterController)
 postersRoutes.delete('/:id', deletePostersController)
-postersRoutes.post('', createPosterController)
-postersRoutes.patch('/:id', updatePosterController)
+postersRoutes.post('', validateData(entryPosterSchema), createPosterController)
+postersRoutes.patch('/:id', validateData(entryPosterSchema.partial()), updatePosterController)
 
 export default postersRoutes
