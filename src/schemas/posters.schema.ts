@@ -22,4 +22,6 @@ const exitPosterSchema = idKey.merge(entryPosterSchema).extend({
     created_at: z.string()
 })
 
-export { entryPosterSchema, exitPosterSchema }
+const listAllPostersSchema = z.array(exitPosterSchema)
+
+export { entryPosterSchema, exitPosterSchema, listAllPostersSchema }
