@@ -7,4 +7,5 @@ type iExitPoster = z.infer<typeof exitPosterSchema>
 type iUpdatePoster = DeepPartial<z.infer<typeof entryPosterSchema>>
 type iListPosters = z.infer<typeof listAllPostersSchema>
 
+
 export { iEntryPoster, iExitPoster, iUpdatePoster, iListPosters }
