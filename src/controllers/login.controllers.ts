@@ -3,6 +3,7 @@ import {
     Response
 } from 'express'
 import { generateTokenService } from '../services/login/generateToken.service'
+import { AppError } from '../error'
 
 
 const generateTokenController = async ( req: Request, res: Response ) => {

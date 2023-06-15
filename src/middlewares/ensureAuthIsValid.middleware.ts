@@ -26,3 +26,6 @@ const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunc
         return next()
     })
 }
+
+
+export { ensureAuthIsValidMiddleware }
