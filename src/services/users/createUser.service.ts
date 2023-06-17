@@ -1,13 +1,16 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { User } from "../../entities/index";
-import { iEntryUser, iExitUser } from "../../interfaces/users.interface";
+import { Address, User } from "../../entities/index";
+import { iAddress, iEntryUser, iExitAddress, iExitUser, iResultAddress, iUser } from "../../interfaces/users.interface";
 import { AppError } from "../../error";
-import { exitUserSchema } from "../../schemas/users.schema";
+import { entryAddressSchema, exitAddressSchema, exitUserSchema, resultAddressSchema, userSchema } from "../../schemas/users.schema";
 
 export const createUserServices = async (payload: iEntryUser): Promise<iExitUser> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
-    const user: iEntryUser = userRepository.create(payload);
+    const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
+    const addressData: iAddress = entryAddressSchema.parse(payload.address);
+    const userData: iUser = userSchema.parse(payload);
+    const user: iUser = userRepository.create(userData);
 
 	const checkEmailExists: boolean = await userRepository.exist({ where: { email: payload.email } })
 	const checkCpfExists: boolean = await userRepository.exist({ where: { cpf: payload.cpf } })
@@ -22,7 +25,17 @@ export const createUserServices = async (payload: iEntryUser): Promise<iExitUser
 	
 	await userRepository.save(user);
 
-	const userReturn: iExitUser = exitUserSchema.parse(user)
+    const addressParse: iResultAddress = resultAddressSchema.parse({
+        ...addressData,
+        user: user
+    })
+    const address: iExitAddress = addressRepository.create(addressParse);
+    await addressRepository.save(address);
+
+	const userReturn: iExitUser = exitUserSchema.parse({
+        ...user,
+        address: address
+    })
 
 	return userReturn;
 };
