@@ -5,6 +5,7 @@ import cors from "cors"
 import { errorHandler } from "./error";
 import postersRoutes from "./routes/posters.routes"
 import usersRoutes from "./routes/users.routes";
+import addressRoutes from "./routes/address.routes";
 import { loginRoutes } from "./routes/login.routes";
 
 const app: Application = express();
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use("/posters", postersRoutes)
 app.use("/users", usersRoutes)
+app.use("/address", addressRoutes)
 app.use("/login", loginRoutes)
 
 app.use(errorHandler)
