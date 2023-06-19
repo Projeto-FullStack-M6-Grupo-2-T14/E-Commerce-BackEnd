@@ -13,7 +13,7 @@ import {
 
 const postersRoutes: Router = Router()
 
-postersRoutes.get('', ensureAuthIsValidMiddleware, listAllPostersController)
+postersRoutes.get('', listAllPostersController)
 postersRoutes.get('/:id', ensureAuthIsValidMiddleware, retrievePosterController)
 postersRoutes.delete('/:id', ensureAuthIsValidMiddleware, deletePostersController)
 postersRoutes.post('', ensureAuthIsValidMiddleware, validateData(entryPosterSchema), createPosterController)

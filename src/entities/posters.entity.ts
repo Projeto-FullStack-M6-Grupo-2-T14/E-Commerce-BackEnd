@@ -7,6 +7,9 @@ class Poster {
     id: number
 
     @Column({ length: 120 })
+    title: string
+
+    @Column({ length: 120 })
     brand: string
 
     @Column({ length: 300})
