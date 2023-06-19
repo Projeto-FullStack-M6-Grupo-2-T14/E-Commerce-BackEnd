@@ -54,8 +54,13 @@ const resultUserSchema = z.object({
     address: idKey.merge(entryAddressSchema)
 })
 
+const resultUserOnPostSchema = resultUserSchema.omit({
+    address: true,
+    password: true
+})
+
 const exitUserSchema = idKey.merge(resultUserSchema)
 
 const listAllUsersSchema = z.array(exitUserSchema)
 
-export { entryUserSchema, exitUserSchema, listAllUsersSchema, entryAddressSchema, exitAddressSchema, userSchema, resultAddressSchema }
+export { entryUserSchema, exitUserSchema, listAllUsersSchema, entryAddressSchema, exitAddressSchema, userSchema, resultAddressSchema, resultUserOnPostSchema }

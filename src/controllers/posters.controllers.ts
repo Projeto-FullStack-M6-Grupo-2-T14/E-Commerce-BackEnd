@@ -29,7 +29,8 @@ const deletePostersController = async (req: Request, res: Response): Promise<Res
 
 const createPosterController = async (req: Request, res: Response): Promise<Response> => {
 	const posterData = req.body;
-	const newPoster = await createPosterServices(posterData);
+  const userId: number = res.locals.subject
+	const newPoster = await createPosterServices(posterData, userId);
 
 	return res.status(201).json(newPoster);
 };
