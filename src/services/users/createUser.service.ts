@@ -3,11 +3,12 @@ import { AppDataSource } from "../../data-source";
 import { Address, User } from "../../entities/index";
 import { iAddress, iEntryUser, iExitAddress, iExitUser, iResultAddress, iUser } from "../../interfaces/users.interface";
 import { AppError } from "../../error";
-import { entryAddressSchema, exitAddressSchema, exitUserSchema, resultAddressSchema, userSchema } from "../../schemas/users.schema";
+import { entryAddressSchema, exitUserSchema, resultAddressSchema, userSchema } from "../../schemas/users.schema";
 
 export const createUserServices = async (payload: iEntryUser): Promise<iExitUser> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
+    
     const addressData: iAddress = entryAddressSchema.parse(payload.address);
     const userData: iUser = userSchema.parse(payload);
     const user: iUser = userRepository.create(userData);
