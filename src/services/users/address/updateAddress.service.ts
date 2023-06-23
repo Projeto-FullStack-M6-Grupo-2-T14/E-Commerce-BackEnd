@@ -2,7 +2,8 @@ import { Repository } from "typeorm";
 import { Address } from "../../../entities";
 import { AppDataSource } from "../../../data-source";
 import { AppError } from "../../../error";
-import { TAddressResponse, TUpdateAddress, addressSchema } from "../../../schemas/address.schema";
+import { TAddressResponse, TUpdateAddress } from "../../../interfaces/address.interfaces";
+import { addressSchema } from "../../../schemas/address.schema";
 
 export const updateAddressServices = async (payload: TUpdateAddress, addressId: number): Promise<TAddressResponse> => {
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
