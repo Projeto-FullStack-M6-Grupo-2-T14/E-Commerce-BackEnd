@@ -13,6 +13,9 @@ const entryAddressSchema = z.object({
     complement: z.string().max(200)
 })
 
+const partialEntryAddressSchema = entryAddressSchema.partial();
+
+
 const userSchema = z.object({
     name: z.string().max(100),
     email: z.string().max(60),
@@ -29,6 +32,8 @@ const resultAddressSchema = entryAddressSchema.extend({
 })
 
 const exitAddressSchema = idKey.merge(resultAddressSchema)
+const returnAddressSchema = idKey.merge(entryAddressSchema)
+
 
 const entryUserSchema = z.object({
     name: z.string().max(100),
@@ -61,6 +66,17 @@ const resultUserOnPostSchema = resultUserSchema.omit({
 
 const exitUserSchema = idKey.merge(resultUserSchema)
 
-const listAllUsersSchema = z.array(exitUserSchema)
+const listAllUsersSchema = resultUserOnPostSchema.array()
 
-export { entryUserSchema, exitUserSchema, listAllUsersSchema, entryAddressSchema, exitAddressSchema, userSchema, resultAddressSchema, resultUserOnPostSchema }
+export { 
+    entryUserSchema, 
+    exitUserSchema, 
+    listAllUsersSchema, 
+    entryAddressSchema, 
+    exitAddressSchema, 
+    userSchema, 
+    resultAddressSchema, 
+    resultUserOnPostSchema,
+    returnAddressSchema,
+    partialEntryAddressSchema
+}

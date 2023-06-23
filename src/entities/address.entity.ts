@@ -24,7 +24,7 @@ class Address {
     @Column({ length: 200 })
     complement: string
 
-    @OneToOne(() => User)
+    @OneToOne(() => User , { onDelete: 'CASCADE' })
     @JoinColumn()
     user: User
 }

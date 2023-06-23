@@ -23,6 +23,7 @@ const dataSourceConfig = (): DataSourceOptions => {
 		logging: true,
 		entities: [entitiesPath],
 		migrations: [migrationPath],
+		schema: "public",
 	};
 };
 export const AppDataSource = new DataSource(dataSourceConfig());
