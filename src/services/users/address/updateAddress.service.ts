@@ -1,11 +1,10 @@
 import { Repository } from "typeorm";
 import { Address } from "../../../entities";
 import { AppDataSource } from "../../../data-source";
-import { iAddressResponse, iUpdateAddress } from "../../../interfaces/users.interface";
-import { returnAddressSchema } from "../../../schemas/users.schema";
 import { AppError } from "../../../error";
+import { TAddressResponse, TUpdateAddress, addressSchema } from "../../../schemas/address.schema";
 
-export const updateAddressServices = async (payload: iUpdateAddress, addressId: number): Promise<iAddressResponse> => {
+export const updateAddressServices = async (payload: TUpdateAddress, addressId: number): Promise<TAddressResponse> => {
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
   
     const address: Address | null = await addressRepository.findOneBy({ id: addressId });
@@ -21,6 +20,6 @@ export const updateAddressServices = async (payload: iUpdateAddress, addressId: 
   
     await addressRepository.save(newAddressData);
   
-    return returnAddressSchema.parse(newAddressData);
+    return addressSchema.parse(newAddressData);
   
   };

@@ -2,10 +2,10 @@ import { Repository } from 'typeorm'
 import { AppDataSource } from '../../data-source'
 import { Poster } from '../../entities/index'
 import { AppError } from '../../error'
-import {  iUpdatePoster, iExitPoster } from '../../interfaces/posters.interface'
 import { exitPosterSchema } from '../../schemas/posters.schema'
+import { TExitPoster } from '../../interfaces/posters.interface'
 
-const updatePosterService = async (posterData: any, posterId: number): Promise<iExitPoster> => {
+const updatePosterService = async (posterData: any, posterId: number): Promise<TExitPoster> => {
     const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster)
     const poster: Poster | null = await posterRepository.findOneBy({
         id: posterId
@@ -14,7 +14,7 @@ const updatePosterService = async (posterData: any, posterId: number): Promise<i
         throw new AppError('Poster not found', 404)
     }
     posterRepository.merge(poster, posterData)
-    const updatedPoster: iExitPoster = await posterRepository.save(poster)
+    const updatedPoster: TExitPoster = await posterRepository.save(poster)
     return exitPosterSchema.parse(updatedPoster)
 }
 

@@ -1,17 +1,18 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address, User } from "../../entities/index";
-import { iAddress, iEntryUser, iExitAddress, iExitUser, iResultAddress, iUser } from "../../interfaces/users.interface";
 import { AppError } from "../../error";
 import { entryAddressSchema, exitUserSchema, resultAddressSchema, userSchema } from "../../schemas/users.schema";
+import { TUserRequest, TUserResponse } from "../../schemas/user.schema";
+import { TAddressrequest } from "../../schemas/address.schema";
 
-export const createUserServices = async (payload: iEntryUser): Promise<iExitUser> => {
+export const createUserServices = async (payload: TUserRequest): Promise<TUserResponse> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
     
-    const addressData: iAddress = entryAddressSchema.parse(payload.address);
-    const userData: iUser = userSchema.parse(payload);
-    const user: iUser = userRepository.create(userData);
+    const addressData: TAddressrequest = entryAddressSchema.parse(payload.address);
+    const userData = userSchema.parse(payload);
+    const user = userRepository.create(userData);
 
 	const checkEmailExists: boolean = await userRepository.exist({ where: { email: payload.email } })
 	const checkCpfExists: boolean = await userRepository.exist({ where: { cpf: payload.cpf } })
@@ -26,14 +27,15 @@ export const createUserServices = async (payload: iEntryUser): Promise<iExitUser
 	
 	await userRepository.save(user);
 
-    const addressParse: iResultAddress = resultAddressSchema.parse({
+    const addressParse = resultAddressSchema.parse({
         ...addressData,
         user: user
     })
-    const address: iExitAddress = addressRepository.create(addressParse);
+    const address = addressRepository.create(addressParse);
+
     await addressRepository.save(address);
 
-	const userReturn: iExitUser = exitUserSchema.parse({
+	const userReturn: TUserResponse = exitUserSchema.parse({
         ...user,
         address: address
     })
