@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { resultUserOnPostSchema } from './users.schema'
+import { userResponse, userSchema } from './user.schema'
 
 const idKey = z.object({
     id: z.number()
@@ -22,7 +22,7 @@ const entryPosterSchema = z.object({
 
 const exitPosterSchema = idKey.merge(entryPosterSchema).extend({
     created_at: z.string(),
-    user: resultUserOnPostSchema
+    user: userResponse
 })
 
 const listAllPostersSchema = z.array(exitPosterSchema)

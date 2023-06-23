@@ -1,4 +1,3 @@
-import { DeepPartial } from "typeorm";
 import { z } from "zod";
 
 export const addressSchema = z.object({
@@ -18,9 +17,7 @@ export const addressSchemaRequest = addressSchema.omit({
 
 export const partialAddressSchema = addressSchemaRequest.partial();
 
-export type TAddressResponse = z.infer<typeof addressSchema>
-export type TAddressrequest = z.infer<typeof addressSchemaRequest>
-export type TUpdateAddress = DeepPartial<z.infer<typeof addressSchemaRequest>>
+
 
 
 
