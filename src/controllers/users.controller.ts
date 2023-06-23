@@ -3,15 +3,16 @@ import { createUserServices } from "../services/users/createUser.service";
 import { iEntryUser } from "../interfaces/users.interface";
 import { listUserServices } from "../services/users/listUsers.service";
 import { deleteUserServices } from "../services/users/deleteUser.service";
+import { updateUserServices } from "../services/users/updateUser.service";
 
-export const createUserController = async (req: Request, res: Response): Promise<Response> => {
+const createUserController = async (req: Request, res: Response): Promise<Response> => {
 	const userData: iEntryUser = req.body;
 	const newUser = await createUserServices(userData);
 
 	return res.status(201).json(newUser);
 };
 
-export const listUserController = async (req: Request, res: Response): Promise<Response> => {
+const listUserController = async (req: Request, res: Response): Promise<Response> => {
 
 	const users = await listUserServices();
   
@@ -19,16 +20,18 @@ export const listUserController = async (req: Request, res: Response): Promise<R
   
 };
   
-export const updateUserController = async (req: Request, res: Response): Promise<Response> => {
+const updateUserController = async (req: Request, res: Response): Promise<Response> => {
   
 	const userData = req.body;
-	const userId = parseInt(req.params.id);  
+	const userId = parseInt(req.params.id);
+
+	const updateUser = await updateUserServices(userData, userId)
   
-	return res.status(200).json();
+	return res.status(200).json(updateUser);
   
 };
   
-export const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
+const deleteUserController = async (req: Request, res: Response): Promise<Response> => {
   
 	const userId = parseInt(req.params.id);
 
@@ -37,4 +40,6 @@ export const deleteUserController = async (req: Request, res: Response): Promise
 	return res.status(204).send();
 	
 };
+
+export { createUserController, listUserController, deleteUserController, updateUserController }
 
