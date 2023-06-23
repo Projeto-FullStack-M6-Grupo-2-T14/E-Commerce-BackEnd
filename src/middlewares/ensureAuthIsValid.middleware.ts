@@ -1,10 +1,6 @@
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import {
-    NextFunction,
-    Request,
-    Response
-} from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 
 const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -30,4 +26,4 @@ const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunc
 }
 
 
-export { ensureAuthIsValidMiddleware }
+export default ensureAuthIsValidMiddleware 

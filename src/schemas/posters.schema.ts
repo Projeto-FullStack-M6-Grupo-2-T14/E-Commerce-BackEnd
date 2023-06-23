@@ -9,7 +9,7 @@ const entryPosterSchema = z.object({
     title: z.string().max(120),
     brand: z.string().max(120),
     model: z.string().max(300),
-    year: z.string().or(z.date()),
+    year: z.string().max(20),
     fuel: z.string().max(80),
     mileage: z.string().max(20),
     color: z.string().max(120),

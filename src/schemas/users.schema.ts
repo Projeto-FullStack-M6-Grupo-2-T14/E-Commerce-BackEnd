@@ -66,7 +66,10 @@ const resultUserOnPostSchema = resultUserSchema.omit({
 
 const exitUserSchema = idKey.merge(resultUserSchema)
 
-const listAllUsersSchema = resultUserOnPostSchema.array()
+const userSchemaResponse = idKey.merge(resultUserOnPostSchema)
+
+const listAllUsersSchema = userSchemaResponse.array()
+
 
 export { 
     entryUserSchema, 
