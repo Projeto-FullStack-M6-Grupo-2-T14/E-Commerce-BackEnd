@@ -1,14 +1,15 @@
 import { Router } from 'express';
 import validateData from '../middlewares/validateData.middleware';
-import { entryUserSchema } from '../schemas/users.schema';
+import ensureAuthIsValidMiddleware from '../middlewares/ensureAuthIsValid.middleware';
 import { createUserController, deleteUserController, listUserController, updateUserController } from '../controllers/users.controller';
-import { ensureAuthIsValidMiddleware } from '../middlewares/ensureAuthIsValid.middleware';
+import isUserOrOwner from '../middlewares/ensureIsOwner.middleware';
+import { userSchemaRequest, userSchemaUpdate } from '../schemas/user.schema';
 
 const usersRoutes: Router = Router()
 
-usersRoutes.post('', validateData(entryUserSchema), createUserController)
+usersRoutes.post('', validateData(userSchemaRequest), createUserController)
 usersRoutes.get('', listUserController)
-usersRoutes.delete('/:id', ensureAuthIsValidMiddleware, deleteUserController)
-usersRoutes.patch('/:id', ensureAuthIsValidMiddleware, updateUserController)
+usersRoutes.delete('/:id', ensureAuthIsValidMiddleware, isUserOrOwner, deleteUserController)
+usersRoutes.patch('/:id', validateData(userSchemaUpdate), ensureAuthIsValidMiddleware, isUserOrOwner, updateUserController)
 
 export default usersRoutes

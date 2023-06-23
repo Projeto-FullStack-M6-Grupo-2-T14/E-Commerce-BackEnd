@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { exitPosterSchema } from "../../schemas/posters.schema";
-import { iExitPoster } from "../../interfaces/posters.interface";
+import { TExitPoster } from "../../interfaces/posters.interface";
 import { Poster } from "../../entities";
 import { AppError } from "../../error";
 
-export const retrievePosterServices = async (posterId: number): Promise<iExitPoster> => {
+export const retrievePosterServices = async (posterId: number): Promise<TExitPoster> => {
     const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
   
     const poster: Poster | null = await posterRepository.findOneBy({ id: posterId });
