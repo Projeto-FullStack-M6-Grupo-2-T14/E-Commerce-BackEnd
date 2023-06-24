@@ -1,49 +1,60 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+	BeforeInsert,
+	BeforeUpdate,
+	Column,
+	Entity,
+	JoinColumn,
+	OneToMany,
+	OneToOne,
+	PrimaryGeneratedColumn,
+} from "typeorm";
 import { Poster } from "./posters.entity";
 import { getRounds, hashSync } from "bcryptjs";
 import { Address } from "./address.entity";
 
-@Entity('users')
+@Entity("users")
 class User {
-    @PrimaryGeneratedColumn('increment')
-    id: number
+	@PrimaryGeneratedColumn("increment")
+	id: number;
 
-    @Column({ type: 'varchar', length: 100 })
-    name: string
+	@Column({ type: "varchar", length: 100 })
+	name: string;
 
-    @Column({ type: 'varchar', length: 60, unique: true })
-    email: string
+	@Column({ type: "varchar", length: 60, unique: true })
+	email: string;
 
-    @Column({ type: 'varchar', length: 120 })
-    password: string;
+	@Column({ type: "varchar", length: 120 })
+	password: string;
 
-    @Column({ length: 11, unique: true })
-    cpf: string
+	@Column({ length: 11, unique: true })
+	cpf: string;
 
-    @Column({ type: 'varchar', length: 12 })
-    phone: string;
+	@Column({ type: "varchar", length: 12 })
+	phone: string;
 
-    @Column({ type: 'date' })
-    birthday: string
+	@Column({ type: "date" })
+	birthday: string;
 
-    @Column({ length: 500 })
-    description: string
+	@Column({ length: 500 })
+	description: string;
 
-    @Column({ default: false })
-    is_seller: boolean
+	@Column({ default: false })
+	is_seller: boolean;
 
-    @OneToMany(() => Poster, (poster) => poster.user) 
-    poster: Poster[]
+	@Column({ nullable: true })
+	reset_password: string;
 
-    @BeforeInsert()
-    @BeforeUpdate()
-    hashPassword(){
-        const isEncrypted = getRounds(this.password)
-        if(!isEncrypted){
-            this.password = hashSync(this.password, 10)
-        }
-    }
-    
+	@OneToMany(() => Poster, (poster) => poster.user)
+	poster: Poster[];
+
+	@BeforeInsert()
+	@BeforeUpdate()
+	hashPassword() {
+		const isEncrypted = getRounds(this.password);
+		if (!isEncrypted) {
+			this.password = hashSync(this.password, 10);
+		}
+	}
 }
 
-export { User }
+export { User };
