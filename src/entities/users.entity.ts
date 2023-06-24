@@ -1,16 +1,6 @@
-import {
-	BeforeInsert,
-	BeforeUpdate,
-	Column,
-	Entity,
-	JoinColumn,
-	OneToMany,
-	OneToOne,
-	PrimaryGeneratedColumn,
-} from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany,	PrimaryGeneratedColumn } from "typeorm";
 import { Poster } from "./posters.entity";
 import { getRounds, hashSync } from "bcryptjs";
-import { Address } from "./address.entity";
 
 @Entity("users")
 class User {
@@ -42,7 +32,7 @@ class User {
 	is_seller: boolean;
 
 	@Column({ nullable: true })
-	reset_password: string;
+	reset_password: string ;
 
 	@OneToMany(() => Poster, (poster) => poster.user)
 	poster: Poster[];
