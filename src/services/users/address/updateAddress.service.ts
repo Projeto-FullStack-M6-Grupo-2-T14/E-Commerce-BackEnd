@@ -5,14 +5,16 @@ import { AppError } from "../../../error";
 import { TAddressResponse, TUpdateAddress } from "../../../interfaces/address.interfaces";
 import { addressSchema } from "../../../schemas/address.schema";
 
-export const updateAddressServices = async (payload: TUpdateAddress, addressId: number): Promise<TAddressResponse> => {
+export const updateAddressServices = async (payload: TUpdateAddress, addressId: number ): Promise<TAddressResponse> => {
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
   
     const address: Address | null = await addressRepository.findOneBy({ id: addressId });
-
+    
     if (!address) {
       throw new AppError("Address not found", 404);
     }
+
+
   
     const newAddressData = {
       ...address,

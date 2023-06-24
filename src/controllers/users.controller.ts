@@ -4,6 +4,7 @@ import { listUserServices } from "../services/users/listUsers.service";
 import { deleteUserServices } from "../services/users/deleteUser.service";
 import { updateUserServices } from "../services/users/updateUser.service";
 import { TUserPartial, TUserRequest } from "../interfaces/users.interface";
+import { retrieveUserServices } from "../services/users/retrieveUser.service";
 
 const createUserController = async (req: Request, res: Response): Promise<Response> => {
 	const userData: TUserRequest = req.body;
@@ -41,5 +42,15 @@ const deleteUserController = async (req: Request, res: Response): Promise<Respon
 	
 };
 
-export { createUserController, listUserController, deleteUserController, updateUserController }
+const retrieveUserController = async (req: Request, res: Response): Promise<Response> => {
+
+	const userId: number = parseInt(req.params.id)
+	
+	const users = await retrieveUserServices(userId);
+  
+	return res.json(users);
+  
+};
+
+export { createUserController, listUserController, deleteUserController, updateUserController, retrieveUserController }
 
