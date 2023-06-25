@@ -8,7 +8,9 @@ import {
 
 
 const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunction) => {
+
     const token: string | undefined = req.headers.authorization
+    
     if (!token) {
         return res.status(401).json({
             message: 'Invalid token.'

@@ -1,10 +1,12 @@
 import { z } from 'zod'
+import { resultUserOnPostSchema } from './users.schema'
 
 const idKey = z.object({
     id: z.number()
 })
 
 const entryPosterSchema = z.object({
+    title: z.string().max(120),
     brand: z.string().max(120),
     model: z.string().max(300),
     year: z.string().or(z.date()),
@@ -15,11 +17,12 @@ const entryPosterSchema = z.object({
     price: z.string().max(20),
     description: z.string().max(200),
     cover_image: z.string().nullish(),
-    is_active: z.boolean().default(false)
+    is_active: z.boolean().default(false),
 })
 
 const exitPosterSchema = idKey.merge(entryPosterSchema).extend({
-    created_at: z.string()
+    created_at: z.string(),
+    user: resultUserOnPostSchema
 })
 
 const listAllPostersSchema = z.array(exitPosterSchema)

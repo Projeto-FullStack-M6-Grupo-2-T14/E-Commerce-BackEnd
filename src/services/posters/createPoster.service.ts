@@ -1,12 +1,22 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { Poster } from "../../entities/index";
+import { Poster, User } from "../../entities/index";
+import { exitPosterSchema } from "../../schemas/posters.schema";
 
-export const createPosterServices = async (payload: any): Promise<Poster[]> => {
+export const createPosterServices = async (payload: any, userId: number) => {
 	const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
-    const poster: Poster[] = posterRepository.create(payload);
-	
+	const userRepository: Repository<User> = AppDataSource.getRepository(User)
+	const user: User | null = await userRepository.findOne({
+		where: {
+			id: userId
+		}
+	})
+    const poster: Poster[] = posterRepository.create({
+		...payload,
+		user: user
+	});
+	console.log(poster)
 	await posterRepository.save(poster);
 
-	return poster;
+	return exitPosterSchema.parse(poster)
 };

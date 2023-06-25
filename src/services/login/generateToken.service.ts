@@ -1,12 +1,12 @@
-import { Repository } from 'typeorm'
-import { AppDataSource } from '../data-source'
-import { User } from '../entities/users.entity'
-import { AppError } from '../error'
-import { compare } from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { Repository } from 'typeorm'
+import { compare } from 'bcryptjs'
+import { AppDataSource } from '../../data-source'
+import { User } from '../../entities'
+import { AppError } from '../../error'
 
 
-const createTokenService = async ({email, password}: any): Promise<string> => {
+const generateTokenService = async ({email, password}: any): Promise<string> => {
     const usersRepository: Repository<User> = AppDataSource.getRepository(User)
 
     const user = await usersRepository.findOne({
@@ -36,4 +36,4 @@ const createTokenService = async ({email, password}: any): Promise<string> => {
 }
 
 
-export { createTokenService }
+export { generateTokenService }
