@@ -31,8 +31,9 @@ class User {
 	@Column({ default: false })
 	is_seller: boolean;
 
-	@Column({ nullable: true })
-	reset_password: string ;
+	@Column({ type: "varchar", nullable: true })
+	reset_password: string | null;
+
 
 	@OneToMany(() => Poster, (poster) => poster.user)
 	poster: Poster[];
