@@ -15,7 +15,7 @@ class Poster {
     @Column({ length: 300})
     model: string
 
-    @Column({ type: 'date' })
+    @Column({ length: 80 })
     year: string
 
     @Column({ length: 80 })

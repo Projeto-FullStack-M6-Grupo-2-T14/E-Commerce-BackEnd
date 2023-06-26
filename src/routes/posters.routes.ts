@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import validateData from '../middlewares/validateData.middleware'
+import ensureAuthIsValidMiddleware from '../middlewares/ensureAuthIsValid.middleware'
 import { entryPosterSchema } from '../schemas/posters.schema'
-import { ensureAuthIsValidMiddleware } from '../middlewares/ensureAuthIsValid.middleware'
 import { 
     listAllPostersController, 
     deletePostersController, 

@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
 import listAllPostersService from "../services/posters/retrieveAllPosters.service";
-import { iEntryPoster, iExitPoster, iListPosters } from "../interfaces/posters.interface";
 import { deletePostersService } from "../services/posters/deletePoster.service";
 import { retrievePosterServices } from "../services/posters/retrievePoster.service";
 import { createPosterServices } from "../services/posters/createPoster.service";
 import updatePosterService from "../services/posters/updatePoster.service";
+import { TEntryPoster, TExitPoster, TListPosters } from "../interfaces/posters.interface";
 
 
 const listAllPostersController = async (req: Request, res: Response): Promise<Response> => {
-  const getPosters: iListPosters = await listAllPostersService();
+  const getPosters: TListPosters = await listAllPostersService();
 
   return res.status(200).json(getPosters);
 };
 
 const retrievePosterController = async (req: Request, res: Response): Promise<Response> => {
   const posterId = parseInt(req.params.id);
-  const poster: iExitPoster = await retrievePosterServices(posterId);
+  const poster: TExitPoster = await retrievePosterServices(posterId);
 
   return res.status(200).json(poster);
 };
@@ -36,9 +36,9 @@ const createPosterController = async (req: Request, res: Response): Promise<Resp
 };
 
 const updatePosterController = async (req: Request, res: Response): Promise<Response> => {
-  const newPosterData: iEntryPoster = req.body
+  const newPosterData: TEntryPoster = req.body
   const posterId: number = res.locals.id
-  const updatedPoster: iExitPoster = await updatePosterService(newPosterData, posterId)
+  const updatedPoster: TExitPoster = await updatePosterService(newPosterData, posterId)
 
   return res.status(200).json(updatedPoster)
 }
