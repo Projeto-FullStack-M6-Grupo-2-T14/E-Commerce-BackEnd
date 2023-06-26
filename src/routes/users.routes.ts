@@ -5,6 +5,7 @@ import {
 	createUserController,
 	deleteUserController,
 	listUserController,
+	retrieveUserController,
 	updateUserController,
 } from "../controllers/users.controller";
 import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware";
@@ -40,6 +41,7 @@ usersRoutes.post("", validateData(userSchemaRequest), createUserController);
 usersRoutes.post("/sendemail", sendEmailUserController);
 usersRoutes.post("/resetpassword", resetUserPassController);
 usersRoutes.get("", listUserController);
+usersRoutes.get("/:id", ensureAuthIsValidMiddleware, retrieveUserController);
 usersRoutes.delete("/:id", ensureAuthIsValidMiddleware, deleteUserController);
 usersRoutes.patch("/:id", ensureAuthIsValidMiddleware, updateUserController);
 
