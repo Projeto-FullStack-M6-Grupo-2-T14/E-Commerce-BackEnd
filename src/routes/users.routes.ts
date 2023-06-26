@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import validateData from "../middlewares/validateData.middleware";
-import { userSchema } from "../schemas/users.schema";
+import { userSchemaRequest } from "../schemas/users.schema";
 import {
 	createUserController,
 	deleteUserController,
@@ -30,12 +30,13 @@ const resetUserPassController = async (
 ): Promise<Response> => {
 	const password = req.body.newPass,
 		reset_token = req.query.reset_token as string;
+
 	resetPassword(password, reset_token);
 
 	return res.status(200).json("Password changed");
 };
 
-usersRoutes.post("", validateData(userSchema), createUserController);
+usersRoutes.post("", validateData(userSchemaRequest), createUserController);
 usersRoutes.post("/sendemail", sendEmailUserController);
 usersRoutes.post("/resetpassword", resetUserPassController);
 usersRoutes.get("", listUserController);
