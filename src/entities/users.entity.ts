@@ -34,7 +34,6 @@ class User {
 	@Column({ type: "varchar", nullable: true })
 	reset_password: string | null;
 
-
 	@OneToMany(() => Poster, (poster) => poster.user)
 	poster: Poster[];
 
