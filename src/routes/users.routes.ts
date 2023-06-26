@@ -1,21 +1,17 @@
 import { Request, Response, Router } from "express";
 import validateData from "../middlewares/validateData.middleware";
-import { entryUserSchema } from "../schemas/users.schema";
+import { userSchema } from "../schemas/users.schema";
 import {
 	createUserController,
 	deleteUserController,
 	listUserController,
 	updateUserController,
 } from "../controllers/users.controller";
-import { ensureAuthIsValidMiddleware } from "../middlewares/ensureAuthIsValid.middleware";
+import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware";
 import {
 	resetPassword,
 	sendEmailResetPassword,
 } from "../services/users/resetUserPassword.service";
-import { Repository } from "typeorm";
-import { User } from "../entities";
-import { AppDataSource } from "../data-source";
-
 
 const usersRoutes: Router = Router();
 
@@ -39,7 +35,7 @@ const resetUserPassController = async (
 	return res.status(200).json("Password changed");
 };
 
-usersRoutes.post("", validateData(entryUserSchema), createUserController);
+usersRoutes.post("", validateData(userSchema), createUserController);
 usersRoutes.post("/sendemail", sendEmailUserController);
 usersRoutes.post("/resetpassword", resetUserPassController);
 usersRoutes.get("", listUserController);
