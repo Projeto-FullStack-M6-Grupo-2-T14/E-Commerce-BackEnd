@@ -1,14 +1,10 @@
-import { z } from 'zod'
-import { entryAddressSchema, entryUserSchema, exitAddressSchema, exitUserSchema, listAllUsersSchema, resultAddressSchema, userSchema } from '../schemas/users.schema'
-import { DeepPartial } from 'typeorm'
+import { DeepPartial } from "typeorm";
+import { z } from "zod";
+import { listAllUsersSchema, userResponse, userSchema, userSchemaRequest, userSchemaResponse, userUpdateSchemaRequest } from "../schemas/user.schema";
 
-type iUser = z.infer<typeof userSchema>
-type iAddress = z.infer<typeof entryAddressSchema>
-type iResultAddress = z.infer<typeof resultAddressSchema>
-type iExitAddress = z.infer<typeof exitAddressSchema>
-type iEntryUser = z.infer<typeof entryUserSchema>
-type iExitUser = z.infer<typeof exitUserSchema>
-type iUpdateUser = DeepPartial<z.infer<typeof entryUserSchema>>
-type iListUsers = z.infer<typeof listAllUsersSchema>
-
-export { iEntryUser, iExitUser, iUpdateUser, iListUsers, iUser, iAddress, iExitAddress, iResultAddress }
+export type TUser = z.infer<typeof userSchema>;
+export type TUserRequest = z.infer<typeof userSchemaRequest>;
+export type TUserPartial = DeepPartial<z.infer<typeof userUpdateSchemaRequest>>;
+export type TUserResponse = z.infer<typeof userSchemaResponse>;
+export type TUpdateUserResponse = z.infer<typeof userResponse>;
+export type TListUsers = z.infer<typeof listAllUsersSchema>;

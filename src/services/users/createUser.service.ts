@@ -1,41 +1,38 @@
-import { Repository } from "typeorm";
+import { DeepPartial, Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Address, User } from "../../entities/index";
-import { iAddress, iEntryUser, iExitAddress, iExitUser, iResultAddress, iUser } from "../../interfaces/users.interface";
 import { AppError } from "../../error";
-import { entryAddressSchema, exitUserSchema, resultAddressSchema, userSchema } from "../../schemas/users.schema";
+import { TUserRequest, TUserResponse } from "../../interfaces/users.interface";
+import { userSchemaResponse } from "../../schemas/user.schema";
 
-export const createUserServices = async (payload: iEntryUser): Promise<iExitUser> => {
+export const createUserServices = async (payload: TUserRequest): Promise<TUserResponse> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
     const addressRepository: Repository<Address> = AppDataSource.getRepository(Address);
-    const addressData: iAddress = entryAddressSchema.parse(payload.address);
-    const userData: iUser = userSchema.parse(payload);
-    const user: iUser = userRepository.create(userData);
 
-	const checkEmailExists: boolean = await userRepository.exist({ where: { email: payload.email } })
-	const checkCpfExists: boolean = await userRepository.exist({ where: { cpf: payload.cpf } })
-
-    if(checkEmailExists){
-        throw new AppError('Email already exists', 409)
+    const checkEmailExists: boolean = await userRepository.exist({ where: { email: payload.email } });
+    if (checkEmailExists) {
+        throw new AppError('Email already exists', 409);
     }
 
-    if(checkCpfExists){
-        throw new AppError('CPF already exists', 409)
+    const checkCpfExists: boolean = await userRepository.exist({ where: { cpf: payload.cpf } });
+    if (checkCpfExists) {
+        throw new AppError('CPF already exists', 409);
     }
-	
-	await userRepository.save(user);
+    
+    const { address, ...userData } = payload; 
+    const user: User = userRepository.create(userData);
+    await userRepository.save(user);
 
-    const addressParse: iResultAddress = resultAddressSchema.parse({
-        ...addressData,
-        user: user
-    })
-    const address: iExitAddress = addressRepository.create(addressParse);
-    await addressRepository.save(address);
+    const addressData: DeepPartial<Address> = address;
+    addressData.user = user;
+    const userAddress: Address = addressRepository.create(addressData);
+    await addressRepository.save(userAddress);
 
-	const userReturn: iExitUser = exitUserSchema.parse({
+    const userResponseData: TUserResponse = userSchemaResponse.parse({
         ...user,
-        address: address
-    })
+        address: userAddress,
+    });
 
-	return userReturn;
+    return userResponseData;
+    
 };

@@ -25,7 +25,13 @@ const generateTokenService = async ({email, password}: any): Promise<string> => 
     }
 
     const token = jwt.sign(
-        {userName: user.name},
+        {           
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            is_seller: user.is_seller,
+            description: user.description
+        },
         process.env.SECRET_KEY!,
         {
             expiresIn: '1h',
