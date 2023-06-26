@@ -22,7 +22,7 @@ const sendEmail = async ({ to, subject, text }: IEmailRequest) => {
 			from: "pethersonreis@gmail.com",
 			to,
 			subject,
-			text: "test",
+			text,
 		})
 		.then(() => {
 			console.log("Email enviado");
@@ -55,7 +55,7 @@ const resetPasswordTemplate = (
 				button: {
 					color: "#DC4D2F",
 					text: "Reset your password",
-					link: `http://localhost:3000/resetPassword/${resetToken}`,
+					link: `http://localhost:5173/login/newpassword?reset_token=${resetToken}`,
 				},
 			},
 			outro:
