@@ -31,16 +31,16 @@ const resetUserPassController = async (
 	req: Request,
 	res: Response
 ): Promise<Response> => {
-	const password = req.body.password;
-
-	resetPassword(password, "tokenReset");
+	const password = req.body.newPass,
+		reset_token = req.query.reset_token as string;
+	resetPassword(password, reset_token);
 
 	return res.status(200).json("Password changed");
 };
 
 usersRoutes.post("", validateData(entryUserSchema), createUserController);
 usersRoutes.post("/sendemail", sendEmailUserController);
-usersRoutes.post("/resetpass/:resettoken", resetUserPassController);
+usersRoutes.post("/resetpassword", resetUserPassController);
 usersRoutes.get("", listUserController);
 usersRoutes.delete("/:id", ensureAuthIsValidMiddleware, deleteUserController);
 usersRoutes.patch("/:id", ensureAuthIsValidMiddleware, updateUserController);
