@@ -15,7 +15,7 @@ import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middle
 const usersRoutes: Router = Router();
 
 usersRoutes.get("", listUserController);
-usersRoutes.get("/:id", ensureAuthIsValidMiddleware, retrieveUserController);
+usersRoutes.get("/:id", retrieveUserController);
 usersRoutes.post("", validateData(userSchemaRequest), createUserController);
 usersRoutes.post("/sendemail", sendEmailUserController);
 usersRoutes.post("/resetpassword", resetUserPassController);
