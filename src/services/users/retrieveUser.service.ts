@@ -1,14 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities";
-import {
-	listUserSchemaResponse,
-	userSchemaResponse,
-} from "../../schemas/users.schema";
-import {
-	TUpdateUserResponse,
-	TUserResponse,
-} from "../../interfaces/users.interface";
+import { listUserSchemaResponse } from "../../schemas/users.schema";
+import { TUpdateUserResponse } from "../../interfaces/users.interface";
 
 export const retrieveUserServices = async (
 	userId: number

@@ -5,15 +5,17 @@ import { TListPosters } from "../../interfaces/posters.interface";
 import { listAllPostersSchema } from "../../schemas/posters.schema";
 
 const listAllPostersService = async (): Promise<TListPosters> => {
-  const postersRepository: Repository<Poster> = AppDataSource.getRepository(Poster)
-  
-  const posters: Array<Poster> = await postersRepository.find({relations: {
-    user: true,
-  }}
-)
-  const returnPosters = listAllPostersSchema.parse(posters)
+	const postersRepository: Repository<Poster> =
+		AppDataSource.getRepository(Poster);
 
-  return returnPosters
-}
+	const posters: Array<Poster> = await postersRepository.find({
+		relations: {
+			user: true,
+		},
+	});
+	// const returnPosters = listAllPostersSchema.parse(posters);
 
-export default listAllPostersService
+	return posters;
+};
+
+export default listAllPostersService;
