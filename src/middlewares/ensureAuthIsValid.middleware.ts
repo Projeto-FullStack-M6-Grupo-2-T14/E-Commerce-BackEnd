@@ -19,7 +19,8 @@ const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunc
                 message: 'Invalid token.'
             })
         }
-        res.locals.userId = decoded.sub
+        console.log(decoded, 'DECODED')
+        res.locals.userId = parseInt(decoded.sub)
 
         return next()
     })

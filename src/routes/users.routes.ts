@@ -6,6 +6,7 @@ import {
 	deleteUserController,
 	listUserController,
 	resetUserPassController,
+	retrieveUserController,
 	sendEmailUserController,
 	updateUserController,
 } from "../controllers/users.controller";
@@ -14,7 +15,7 @@ import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middle
 const usersRoutes: Router = Router();
 
 usersRoutes.get("", listUserController);
-// usersRoutes.get("")
+usersRoutes.get("/:id", ensureAuthIsValidMiddleware, retrieveUserController);
 usersRoutes.post("", validateData(userSchemaRequest), createUserController);
 usersRoutes.post("/sendemail", sendEmailUserController);
 usersRoutes.post("/resetpassword", resetUserPassController);
