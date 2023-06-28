@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { Poster, User } from "../../entities/index";
 import { exitPosterSchema } from "../../schemas/posters.schema";
 
-export const createPosterServices = async (payload: any, userId: number) => {
+const createPosterServices = async (payload: any, userId: number) => {
 	const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
 	const userRepository: Repository<User> = AppDataSource.getRepository(User)
 	
@@ -21,3 +21,5 @@ export const createPosterServices = async (payload: any, userId: number) => {
 
 	return exitPosterSchema.parse(poster)
 };
+
+export default createPosterServices

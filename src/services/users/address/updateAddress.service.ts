@@ -13,8 +13,6 @@ export const updateAddressServices = async (payload: TUpdateAddress, addressId: 
     if (!address) {
       throw new AppError("Address not found", 404);
     }
-
-
   
     const newAddressData = {
       ...address,

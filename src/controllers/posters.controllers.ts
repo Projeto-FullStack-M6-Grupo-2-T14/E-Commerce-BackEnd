@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import listAllPostersService from "../services/posters/retrieveAllPosters.service";
-import { deletePostersService } from "../services/posters/deletePoster.service";
-import { retrievePosterServices } from "../services/posters/retrievePoster.service";
-import { createPosterServices } from "../services/posters/createPoster.service";
+import listAllPostersService from "../services/posters/listAllPosters.service";
 import updatePosterService from "../services/posters/updatePoster.service";
+import retrievePosterServices from "../services/posters/retrievePoster.service";
+import deletePostersService from "../services/posters/deletePoster.service";
+import createPosterServices from "../services/posters/createPoster.service";
 import { TEntryPoster, TExitPoster, TListPosters } from "../interfaces/posters.interface";
 
 
