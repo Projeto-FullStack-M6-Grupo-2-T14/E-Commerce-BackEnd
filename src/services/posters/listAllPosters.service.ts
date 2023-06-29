@@ -13,7 +13,7 @@ const listAllPostersService = async (): Promise<TListPosters> => {
 			user: true,
 		},
 	});
-	const returnPosters = listAllPostersSchema.parse(posters)
+	const returnPosters = listAllPostersSchema.parse(posters);
 
 	return returnPosters;
 };
