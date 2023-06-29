@@ -1,47 +1,49 @@
-import jwt from "jsonwebtoken";
-import { Repository } from "typeorm";
-import { compare } from "bcryptjs";
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entities";
-import { AppError } from "../../error";
+import jwt from 'jsonwebtoken'
+import { Repository } from 'typeorm'
+import { compare } from 'bcryptjs'
+import { AppDataSource } from '../../data-source'
+import { User } from '../../entities'
+import { AppError } from '../../error'
 
-const generateTokenService = async ({
-	email,
-	password,
-}: any): Promise<string> => {
-	const usersRepository: Repository<User> = AppDataSource.getRepository(User);
+interface IGenerateToken {
+    email: string,
+    password: string
+}
 
-	const user = await usersRepository.findOne({
-		where: {
-			email,
-		},
-	});
-	if (!user) {
-		throw new AppError("Invalid credentials", 403);
-	}
+const generateTokenService = async ({email, password}: IGenerateToken): Promise<string> => {
+    const usersRepository: Repository<User> = AppDataSource.getRepository(User)
 
-	const passwordMatch = await compare(password, user.password);
+    const user = await usersRepository.findOne({
+        where: {
+            email
+        }
+    })
+    if (!user) {
+        throw new AppError('Invalid credentials', 403)
+    }
 
-	if (!passwordMatch) {
-		throw new AppError("Invalid credentials", 403);
-	}
+    const passwordMatch = await compare(password, user.password)
 
-	const token = jwt.sign(
-		{
-			id: user.id,
-			name: user.name,
-			email: user.email,
-			is_seller: user.is_seller,
-			description: user.description,
-		},
-		process.env.SECRET_KEY!,
-		{
-			expiresIn: process.env.EXPIRES_IN,
-			subject: String(user.id),
-		}
-	);
+    if (!passwordMatch) {
+        throw new AppError('Invalid credentials', 403)
+    }
 
-	return token;
-};
+    const token = jwt.sign(
+        {           
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            is_seller: user.is_seller,
+            description: user.description
+        },
+        process.env.SECRET_KEY!,
+        {
+            expiresIn: '1h',
+            subject: String(user.id)
+        }
+    )
+    return token
+}
 
-export { generateTokenService };
+
+export { generateTokenService }

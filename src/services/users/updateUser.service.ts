@@ -8,10 +8,7 @@ import {
 	TUserPartial,
 } from "../../interfaces/users.interface";
 
-export const updateUserServices = async (
-	payload: TUserPartial,
-	userId: number
-): Promise<TUpdateUserResponse> => {
+export const updateUserServices = async ( payload: TUserPartial, userId: number ): Promise<TUpdateUserResponse> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
 	const user: User | null = await userRepository.findOneBy({ id: userId });
