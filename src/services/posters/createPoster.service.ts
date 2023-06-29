@@ -4,22 +4,24 @@ import { Poster, User } from "../../entities/index";
 import { exitPosterSchema } from "../../schemas/posters.schema";
 
 const createPosterServices = async (payload: any, userId: number) => {
-	const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
-	const userRepository: Repository<User> = AppDataSource.getRepository(User)
-	
+	const posterRepository: Repository<Poster> =
+		AppDataSource.getRepository(Poster);
+	const userRepository: Repository<User> = AppDataSource.getRepository(User);
+
 	const user: User | null = await userRepository.findOne({
 		where: {
-			id: userId
-		}
-	})
-    const poster: Poster[] = posterRepository.create({
+			id: userId,
+		},
+	});
+
+	const poster: Poster[] = posterRepository.create({
 		...payload,
-		user: user
+		user: user,
 	});
 
 	await posterRepository.save(poster);
 
-	return exitPosterSchema.parse(poster)
+	return exitPosterSchema.parse(poster);
 };
 
-export default createPosterServices
+export default createPosterServices;
