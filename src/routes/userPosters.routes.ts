@@ -1,13 +1,8 @@
 import { Router } from "express";
 import listUserPostersController from "../controllers/userPosters.controllers";
-import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware";
 
 const userPosterRoutes: Router = Router();
 
-userPosterRoutes.get(
-	"/:id",
-	ensureAuthIsValidMiddleware,
-	listUserPostersController
-);
+userPosterRoutes.get("/:id", listUserPostersController);
 
 export default userPosterRoutes;
