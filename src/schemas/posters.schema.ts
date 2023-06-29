@@ -1,5 +1,7 @@
 import { z } from "zod";
-import { userResponse, userSchema } from "./users.schema";
+import { userResponse, userSchema, userSchemaResponseOnComment } from "./users.schema";
+import { commentSchema, commentSchemaResponse, commentSchemaResponseList, TCommentResponse } from "./comments.schema";
+import { Comment } from "../entities";
 
 const idKey = z.object({
 	id: z.number(),
@@ -23,8 +25,18 @@ const entryPosterSchema = z.object({
 const exitPosterSchema = idKey.merge(entryPosterSchema).extend({
 	created_at: z.string(),
 	user: userResponse,
+	comments: z.array(commentSchemaResponse).nullish()
 });
+
+const exitPosterSchemaWithComments = exitPosterSchema.extend({
+	comments: commentSchemaResponseList
+})
 
 const listAllPostersSchema = z.array(exitPosterSchema);
 
-export { entryPosterSchema, exitPosterSchema, listAllPostersSchema };
+const exitPosterOnComment = z.object({
+	id: z.number(),
+	title: z.string()
+})
+
+export { entryPosterSchema, exitPosterSchema, listAllPostersSchema, exitPosterSchemaWithComments, exitPosterOnComment };

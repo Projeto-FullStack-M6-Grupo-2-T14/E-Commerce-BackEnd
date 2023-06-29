@@ -5,7 +5,7 @@ import { AppError } from '../../error'
 import { exitPosterSchema } from '../../schemas/posters.schema'
 import { TExitPoster } from '../../interfaces/posters.interface'
 
-const updatePosterService = async (posterData: any, posterId: number): Promise<TExitPoster> => {
+const updatePosterService = async (posterData: any, posterId: number) => {
     const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster)
     const poster: Poster | null = await posterRepository.findOneBy({
         id: posterId

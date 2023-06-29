@@ -20,13 +20,13 @@ const ensureAuthIsValidMiddleware = (
 		process.env.SECRET_KEY!,
 		(error: any, decoded: any) => {
 			console.log(process.env.SECRET_KEY);
-			// if (error) {
-			// 	return res.status(401).json({
-			// 		message: "Invalid token.",
-			// 	});
-			// }
+			if (error) {
+				return res.status(401).json({
+					message: "Invalid token.",
+				});
+			}
 			console.log(decoded, "DECODED");
-			// res.locals.userId = parseInt(decoded.sub);
+			res.locals.userId = parseInt(decoded.sub);
 
 			return next();
 		}
