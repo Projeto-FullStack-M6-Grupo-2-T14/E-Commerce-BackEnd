@@ -4,8 +4,10 @@ import {
 	PrimaryGeneratedColumn,
 	CreateDateColumn,
 	ManyToOne,
+	OneToMany,
 } from "typeorm";
 import { User } from "./users.entity";
+import { Comment } from "./comment.entity";
 
 @Entity("posters")
 class Poster {
@@ -53,6 +55,9 @@ class Poster {
 
 	@ManyToOne(() => User)
 	user: User;
+
+	@OneToMany(() => Comment, (comment) => comment.poster)
+	comments: Comment[]
 }
 
 export { Poster };
