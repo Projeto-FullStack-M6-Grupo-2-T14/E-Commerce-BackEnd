@@ -5,6 +5,7 @@ import { TExitPoster } from "../../interfaces/posters.interface";
 import { Poster } from "../../entities";
 import { AppError } from "../../error";
 
+
 const retrievePosterServices = async (posterId: number) => {
     const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
 
@@ -33,4 +34,3 @@ const retrievePosterServices = async (posterId: number) => {
 }
 
 export default retrievePosterServices
-
