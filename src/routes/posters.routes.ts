@@ -13,11 +13,7 @@ import {
 const postersRoutes: Router = Router();
 
 postersRoutes.get("", listAllPostersController);
-postersRoutes.get(
-	"/:id",
-	ensureAuthIsValidMiddleware,
-	retrievePosterController
-);
+postersRoutes.get("/:id", retrievePosterController);
 postersRoutes.delete(
 	"/:id",
 	ensureAuthIsValidMiddleware,
