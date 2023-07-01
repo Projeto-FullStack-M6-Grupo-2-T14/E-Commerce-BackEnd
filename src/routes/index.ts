@@ -4,7 +4,7 @@ import usersRoutes from "./users.routes";
 import addressRoutes from "./address.routes";
 import postersRoutes from "./posters.routes";
 import userPosterRoutes from "./userPosters.routes";
-import { commentsRoutes } from "./comments.routes";
+import commentsRoutes from "./comments.routes";
 
 export const mainRoutes: Router = Router();
 

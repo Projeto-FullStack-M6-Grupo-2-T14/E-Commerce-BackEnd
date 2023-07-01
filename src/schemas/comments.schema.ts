@@ -1,31 +1,24 @@
 import { z } from 'zod'
-import { userResponse, userSchemaResponseOnComment } from './users.schema'
-import { exitPosterOnComment } from './posters.schema'
-
-
-const idKey = z.object({
-	id: z.number(),
-})
+import { userSchemaResponseOnComment } from './users.schema'
+import { posterSchemaResponseOnComment } from './posters.schema'
 
 const commentSchema = z.object({
+    id: z.number(),
     text: z.string().max(600),
     user: userSchemaResponseOnComment,
-    posterId: z.number(),
+    poster: posterSchemaResponseOnComment
 })
 
 const commentSchemaRequest = commentSchema.omit({
     id: true,
-    user: true
+    user: true,
+    poster: true
 })
 
-const commentSchemaResponse = idKey.merge(commentSchema).omit({
-    posterId: true
-}).extend({
-    poster: exitPosterOnComment
+const commentSchemaResponse = commentSchema.omit({
+    poster: true
 })
-
-export type TCommentResponse = z.infer<typeof commentSchemaResponse>
 
 const commentSchemaResponseList = z.array(commentSchemaResponse)
 
-export { commentSchema, commentSchemaRequest, commentSchemaResponse, commentSchemaResponseList }
+export { commentSchema, commentSchemaRequest, commentSchemaResponseList }

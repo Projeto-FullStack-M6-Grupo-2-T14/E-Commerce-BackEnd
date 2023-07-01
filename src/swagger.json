@@ -29,17 +29,87 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/User"
+                                "$ref": "#/components/schemas/UserRequest"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "name": "João Silva",
+                                        "email": "joao@gmail.com",
+                                        "password": "1234",
+                                        "cpf": "11122233344",
+                                        "phone": "81988886666",
+                                        "birthday": "01/01/2001",
+                                        "description": "Escrever alguma coisa aqui",
+                                        "address": {
+                                            "zipcode": "55525000",
+                                            "state": "Pernambuco",
+                                            "city": "Recife",
+                                            "street": "Rua Principal",
+                                            "number": "123",
+                                            "complement": "Casa"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/UserResponse"
+                                },
+                                "examples": {
+                                    "user": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "João Silva",
+                                            "email": "joao@gmail.com",
+                                            "password": "1234",
+                                            "cpf": "11122233344",
+                                            "phone": "81988886666",
+                                            "birthday": "01/01/2001",
+                                            "description": "Escrever alguma coisa aqui",
+                                            "address": {
+                                                "id": 1,
+                                                "zipcode": "55525000",
+                                                "state": "Pernambuco",
+                                                "city": "Recife",
+                                                "street": "Rua Principal",
+                                                "number": "123",
+                                                "complement": "Casa"
+                                            }
+                                        }
+                                    }
+                                }
+    
+                            }
+
+                        }
+                    }
                 }
+
+            },
+            "get": {
+                "summary": "Listagem de Usuários",
+                "descripition": "Rota responsável por listar todos os usuários cadastrados.",
+                "tags": ["Users"]                
+            },
+            "get": {
+                "summary": "Capiturar informações de Usuário",
+                "descripition": "Rota responsável por listar todos os usuários cadastrados.",
+                "tags": ["Users"]                
             }
         }
     },
     "components": {
         "schemas": {
-            "User": {
+            "UserRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -87,7 +157,63 @@
                         }
                     }
                 }
+            },
+            "UserResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "zipcode": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "street": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "string"
+                            },
+                            "complement": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             }
+
         }
     }
 }

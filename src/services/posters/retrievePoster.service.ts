@@ -1,7 +1,5 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
-import { exitPosterSchema, exitPosterSchemaWithComments } from "../../schemas/posters.schema";
-import { TExitPoster } from "../../interfaces/posters.interface";
 import { Poster } from "../../entities";
 import { AppError } from "../../error";
 

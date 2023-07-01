@@ -23,7 +23,7 @@ class Poster {
 	@Column({ length: 300 })
 	model: string;
 
-	@Column({ type: "date", default: () => 'now()' })
+	@Column({ length: 4, nullable: true })
 	year: string;
 
 	@Column({ length: 80 })

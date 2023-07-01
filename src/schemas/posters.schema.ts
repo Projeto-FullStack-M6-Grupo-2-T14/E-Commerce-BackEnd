@@ -1,11 +1,8 @@
 import { z } from "zod";
-import { userResponse } from "./users.schema";
+import { userSchemaResponseOnComment } from "./users.schema";
 
-const idKey = z.object({
+const posterSchema = z.object({
 	id: z.number(),
-});
-
-const entryPosterSchema = z.object({
 	title: z.string().max(120),
 	brand: z.string().max(120),
 	model: z.string().max(300),
@@ -18,19 +15,46 @@ const entryPosterSchema = z.object({
 	description: z.string().max(200),
 	cover_image: z.string().nullish(),
 	is_active: z.boolean().default(false),
-});
-
-const updatePosterSchema = entryPosterSchema.partial()
-
-const exitPosterSchema = idKey.merge(entryPosterSchema).extend({
 	created_at: z.string(),
-	user: userResponse,
+	user: userSchemaResponseOnComment
 });
 
-const updateSchemaResponse = exitPosterSchema.omit({
+const posterSchemaRequest = posterSchema.omit({
+	id: true,
+	created_at: true,
+	user: true
+})
+
+const updatePosterSchema = posterSchemaRequest.partial()
+
+const updateSchemaResponse = posterSchema.omit({
 	user: true,
 });
 
-const listAllPostersSchema = z.array(exitPosterSchema);
+const listAllPostersSchema = z.array(posterSchema);
 
-export { entryPosterSchema, exitPosterSchema, listAllPostersSchema, updateSchemaResponse, updatePosterSchema };
+const posterSchemaResponseOnComment = posterSchema.omit({
+	title: true,
+	brand: true,
+	model: true,
+	year: true,
+	fuel: true,
+	mileage: true,
+	color: true,
+	fipe_price: true,
+	price: true,
+	description: true,
+	cover_image: true,
+	is_active: true,
+	created_at: true,
+	user: true
+})
+
+export { 
+	posterSchema, 
+	posterSchemaRequest, 
+	posterSchemaResponseOnComment, 
+	listAllPostersSchema, 
+	updateSchemaResponse, 
+	updatePosterSchema 
+};

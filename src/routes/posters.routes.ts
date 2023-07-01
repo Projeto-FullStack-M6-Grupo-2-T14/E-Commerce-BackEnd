@@ -1,7 +1,7 @@
 import { Router } from "express";
 import validateData from "../middlewares/validateData.middleware";
 import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware";
-import { entryPosterSchema, updatePosterSchema } from "../schemas/posters.schema";
+import { posterSchemaRequest, updatePosterSchema } from "../schemas/posters.schema";
 import {
 	listAllPostersController,
 	deletePostersController,
@@ -12,7 +12,7 @@ import {
 
 const postersRoutes: Router = Router();
 
-postersRoutes.post("", ensureAuthIsValidMiddleware, validateData(entryPosterSchema), createPosterController);
+postersRoutes.post("", ensureAuthIsValidMiddleware, validateData(posterSchemaRequest), createPosterController);
 postersRoutes.get("", listAllPostersController);
 postersRoutes.get("/:id", ensureAuthIsValidMiddleware, retrievePosterController);
 postersRoutes.patch("/:id", ensureAuthIsValidMiddleware, validateData(updatePosterSchema), updatePosterController);
