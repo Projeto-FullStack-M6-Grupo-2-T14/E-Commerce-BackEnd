@@ -6,50 +6,49 @@ import deletePostersService from "../services/posters/deletePoster.service";
 import createPosterServices from "../services/posters/createPoster.service";
 import { TEntryPoster, TExitPoster, TListPosters, TUpdatePoster, TUpdatePosterResponse } from "../interfaces/posters.interface";
 
-
 const listAllPostersController = async (req: Request, res: Response): Promise<Response> => {
-  const getPosters: TListPosters = await listAllPostersService();
+	const getPosters: TListPosters = await listAllPostersService();
 
-  return res.status(200).json(getPosters);
+	return res.status(200).json(getPosters);
 };
 
 const retrievePosterController = async (req: Request, res: Response): Promise<Response> => {
-  const posterId: number = parseInt(req.params.id)
-  const poster: TExitPoster = await retrievePosterServices(posterId);
+	const posterId: number = parseInt(req.params.id)
+	const poster: TExitPoster = await retrievePosterServices(posterId);
 
-  return res.status(200).json(poster);
+	return res.status(200).json(poster);
 };
 
 const deletePostersController = async (req: Request, res: Response): Promise<Response> => {
-  const posterId: number = parseInt(req.params.id)
+	const posterId: number = parseInt(req.params.id)
 
-  await deletePostersService(Number(posterId));
+	await deletePostersService(Number(posterId));
 
-  return res.status(204).send();
+	return res.status(204).send();
 };
 
 const createPosterController = async (req: Request, res: Response): Promise<Response> => {
 	const posterData: TEntryPoster = req.body;
-  const userId: number = res.locals.userId
+	const userId: number = res.locals.userId
 	const newPoster = await createPosterServices(posterData, userId);
 
 	return res.status(201).json(newPoster);
 };
 
 const updatePosterController = async (req: Request, res: Response): Promise<Response> => {
-  const newPosterData: TUpdatePoster = req.body
-  const posterId: number = parseInt(req.params.id)
-  const userId: number = res.locals.userId
+	const newPosterData: TUpdatePoster = req.body
+	const posterId: number = parseInt(req.params.id)
+	const userId: number = res.locals.userId
 
-  const updatedPoster: TUpdatePosterResponse = await updatePosterService(newPosterData, posterId, userId)
+	const updatedPoster: TUpdatePosterResponse = await updatePosterService(newPosterData, posterId, userId)
 
-  return res.status(200).json(updatedPoster)
-}
+	return res.status(200).json(updatedPoster);
+};
 
 export {
-  listAllPostersController,
-  deletePostersController,
-  retrievePosterController,
-  createPosterController,
-  updatePosterController
+	listAllPostersController,
+	deletePostersController,
+	retrievePosterController,
+	createPosterController,
+	updatePosterController,
 };

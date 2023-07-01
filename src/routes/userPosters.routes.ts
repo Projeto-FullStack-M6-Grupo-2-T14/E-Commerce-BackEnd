@@ -5,4 +5,4 @@ const userPosterRoutes: Router = Router();
 
 userPosterRoutes.get("/:id", listUserPostersController);
 
-export default userPosterRoutes
+export default userPosterRoutes;

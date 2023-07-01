@@ -2,9 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 
-
 const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunction) => {
-
     const token: string | undefined = req.headers.authorization
     
     if (!token) {
@@ -20,9 +18,9 @@ const ensureAuthIsValidMiddleware = (req: Request, res: Response, next: NextFunc
 
         res.locals.userId = parseInt(decoded.sub)
 
-        return next()
-    })
-}
+			return next();
+		}
+	);
+};
 
-
-export default ensureAuthIsValidMiddleware 
+export default ensureAuthIsValidMiddleware;
