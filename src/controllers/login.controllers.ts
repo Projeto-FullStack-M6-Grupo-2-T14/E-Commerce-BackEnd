@@ -8,4 +8,6 @@ const generateTokenController = async (req: Request, res: Response) => {
 	return res.json({ token });
 };
 
-export { generateTokenController };
+
+
+export default generateTokenController 
