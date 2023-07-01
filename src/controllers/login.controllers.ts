@@ -10,4 +10,4 @@ const generateTokenController = async ( req: Request, res: Response ) => {
 }
 
 
-export { generateTokenController }
+export default generateTokenController 

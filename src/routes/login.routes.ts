@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { generateTokenController } from '../controllers/login.controllers'
+import generateTokenController from '../controllers/login.controllers'
 
 const loginRoutes = Router()
 

@@ -1,0 +1,93 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "MotorsShop - E-Commerce (Back-End)",
+        "description": "Api criada pelo Grupo 2/Turma 14 da Kenzie Academy Brasil",
+        "contact": {
+            "email": "nuno.ribeiro05@hotmail.com"
+        },
+        "version": "1.0.0",
+        "servers": [
+            {
+                "url": "http//localhost:3000",
+                "descripítion": "Api de Teste"
+            },
+            {
+                "url": "http//localhost:3000",
+                "descripítion": "Api de Produção"
+            }
+        ]    
+
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "summary": "Cadastro de Usuário",
+                "descripition": "Rota responsável pela criação de um usuário.",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "birthday": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "object",
+                        "properties": {
+                            "zipcode": {
+                                "type": "string"
+                            },
+                            "state": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "street": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "string"
+                            },
+                            "complement": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
