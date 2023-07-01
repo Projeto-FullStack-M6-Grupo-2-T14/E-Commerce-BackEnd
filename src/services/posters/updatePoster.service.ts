@@ -16,7 +16,6 @@ const updatePosterService = async (payload: TUpdatePoster, posterId: number, use
     if (!poster) {
         throw new AppError('Poster not found', 404)
     }
-    console.log(poster.user.id, userId)
 
     if (poster.user.id !== userId) {
         throw new AppError('You are not the owner of this poster', 403);
