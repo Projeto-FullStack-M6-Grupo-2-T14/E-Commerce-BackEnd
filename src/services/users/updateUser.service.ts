@@ -3,15 +3,9 @@ import { User } from "../../entities";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../error";
 import { userResponse } from "../../schemas/users.schema";
-import {
-	TUpdateUserResponse,
-	TUserPartial,
-} from "../../interfaces/users.interface";
+import { TUpdateUserResponse, TUserPartial } from "../../interfaces/users.interface";
 
-export const updateUserServices = async (
-	payload: TUserPartial,
-	userId: number
-): Promise<TUpdateUserResponse> => {
+export const updateUserServices = async ( payload: TUserPartial, userId: number ): Promise<TUpdateUserResponse> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
 	const user: User | null = await userRepository.findOneBy({ id: userId });
