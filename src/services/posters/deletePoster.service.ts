@@ -6,11 +6,7 @@ import { AppError } from "../../error";
 const deletePostersService = async (posterId: number) => {
   const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
 
-  const poster: Poster | null = await posterRepository.findOne({
-    where: {
-      id: Number(posterId),
-    },
-  });
+  const poster: Poster | null = await posterRepository.findOne({ where: { id: posterId } });
 
   if (!poster) {
     throw new AppError("Poster not found", 404);

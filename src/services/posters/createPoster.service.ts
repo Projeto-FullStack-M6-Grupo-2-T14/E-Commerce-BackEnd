@@ -1,18 +1,14 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Poster, User } from "../../entities/index";
-import { exitPosterSchema } from "../../schemas/posters.schema";
+import { posterSchema } from "../../schemas/posters.schema";
+import { TExitPoster } from "../../interfaces/posters.interface";
 
-const createPosterServices = async (payload: any, userId: number) => {
-	const posterRepository: Repository<Poster> =
-		AppDataSource.getRepository(Poster);
+const createPosterServices = async (payload: any, userId: number): Promise<TExitPoster> => {
+	const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-	const user: User | null = await userRepository.findOne({
-		where: {
-			id: userId,
-		},
-	});
+	const user: User | null = await userRepository.findOne({ where: { id: userId } });
 
 	const poster: Poster[] = posterRepository.create({
 		...payload,
@@ -21,7 +17,7 @@ const createPosterServices = async (payload: any, userId: number) => {
 
 	await posterRepository.save(poster);
 
-	return exitPosterSchema.parse(poster);
+	return posterSchema.parse(poster);
 };
 
 export default createPosterServices;

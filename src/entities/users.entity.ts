@@ -1,6 +1,7 @@
 import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany,	PrimaryGeneratedColumn } from "typeorm";
 import { Poster } from "./posters.entity";
 import { getRounds, hashSync } from "bcryptjs";
+import { Comment } from "./comment.entity";
 
 @Entity("users")
 class User {
@@ -36,6 +37,10 @@ class User {
 
 	@OneToMany(() => Poster, (poster) => poster.user)
 	poster: Poster[];
+
+	@OneToMany(() => Comment, (comment) => comment.user)
+	comments: Comment[]
+
 
 	@BeforeInsert()
 	@BeforeUpdate()

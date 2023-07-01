@@ -36,6 +36,17 @@ export const listUserSchemaResponse = userSchema.omit({
     address: true,
 });
 
+export const userSchemaResponseOnComment = userSchema.omit({
+    email: true,
+    password: true,
+    cpf: true,
+    phone: true,
+    birthday: true,
+    description: true,
+    is_seller: true,
+    address: true,
+})
+
 export const userSchemaUpdate = listUserSchemaResponse.partial();
 
 export const listAllUsersSchema = listUserSchemaResponse.array()

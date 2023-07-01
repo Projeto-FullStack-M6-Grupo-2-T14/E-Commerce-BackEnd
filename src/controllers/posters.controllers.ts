@@ -22,7 +22,7 @@ const retrievePosterController = async (req: Request, res: Response): Promise<Re
 const deletePostersController = async (req: Request, res: Response): Promise<Response> => {
 	const posterId: number = parseInt(req.params.id)
 
-	await deletePostersService(Number(posterId));
+	await deletePostersService(posterId);
 
 	return res.status(204).send();
 };

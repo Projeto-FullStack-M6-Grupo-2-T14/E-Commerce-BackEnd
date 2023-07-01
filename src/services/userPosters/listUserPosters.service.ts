@@ -12,9 +12,9 @@ const listUserPostersService = async (userId: number): Promise<TListPosters> => 
     relations: ['user'],
   });
 
-  const returnPosters: TListPosters = listAllPostersSchema.parse(posters);
+  //return listAllPostersSchema.parse(posters);;
 
-  return returnPosters;
+  return posters
 };
 
 export default listUserPostersService;
