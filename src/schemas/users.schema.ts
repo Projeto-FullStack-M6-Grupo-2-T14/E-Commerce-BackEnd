@@ -1,41 +1,8 @@
-import { z } from 'zod'
+import { z } from "zod";
+import { addressSchemaRequest } from "./address.schema";
 
-const idKey = z.object({
-    id: z.number()
-})
-
-const entryAddressSchema = z.object({
-    zipcode: z.string().max(8),
-    state: z.string().max(80),
-    city: z.string().max(120),
-    street: z.string().max(150),
-    number: z.string().max(8),
-    complement: z.string().max(200)
-})
-
-const partialEntryAddressSchema = entryAddressSchema.partial();
-
-
-const userSchema = z.object({
-    name: z.string().max(100),
-    email: z.string().max(60),
-    password: z.string().max(120),
-    cpf: z.string().max(11),
-    phone: z.string().max(12),
-    birthday: z.string(z.date()),
-    description: z.string().max(500),
-    is_seller: z.boolean().default(false)
-})
-
-const resultAddressSchema = entryAddressSchema.extend({
-    user: idKey.merge(userSchema)
-})
-
-const exitAddressSchema = idKey.merge(resultAddressSchema)
-const returnAddressSchema = idKey.merge(entryAddressSchema)
-
-
-const entryUserSchema = z.object({
+export const userSchema = z.object({
+    id: z.number(),
     name: z.string().max(100),
     email: z.string().max(60),
     password: z.string().max(120),
@@ -44,39 +11,32 @@ const entryUserSchema = z.object({
     birthday: z.string(z.date()),
     description: z.string().max(500),
     is_seller: z.boolean().default(false),
-    address: entryAddressSchema
-})
+    address: addressSchemaRequest
+});
 
-const resultUserSchema = z.object({
-    name: z.string().max(100),
-    email: z.string().max(60),
-    password: z.string().max(120),
-    cpf: z.string().max(11),
-    phone: z.string().max(12),
-    birthday: z.string(z.date()),
-    description: z.string().max(500),
-    is_seller: z.boolean().default(false),
-    address: idKey.merge(entryAddressSchema)
-})
+export const userSchemaRequest = userSchema.omit({
+  id: true,
+});
 
-const resultUserOnPostSchema = resultUserSchema.omit({
+export const userSchemaResponse = userSchema.omit({
+    password: true,
+});
+
+export const userUpdateSchemaRequest = userSchema.omit({
+    id: true,
     address: true,
-    password: true
-})
+  });
+  
+export const userResponse = userSchema.omit({
+    password: true,
+    address: true
+});
 
-const exitUserSchema = idKey.merge(resultUserSchema)
+export const listUserSchemaResponse = userSchema.omit({
+    address: true,
+});
 
-const listAllUsersSchema = resultUserOnPostSchema.array()
+export const userSchemaUpdate = listUserSchemaResponse.partial();
 
-export { 
-    entryUserSchema, 
-    exitUserSchema, 
-    listAllUsersSchema, 
-    entryAddressSchema, 
-    exitAddressSchema, 
-    userSchema, 
-    resultAddressSchema, 
-    resultUserOnPostSchema,
-    returnAddressSchema,
-    partialEntryAddressSchema
-}
+export const listAllUsersSchema = listUserSchemaResponse.array()
+

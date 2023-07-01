@@ -52,7 +52,7 @@ const resetPassword = async (password: string, resetToken: string) => {
 		},
 		{
 			password: hashSync(password, 10),
-			// reset_password: null,
+			reset_password: null,
 		}
 	);
 };

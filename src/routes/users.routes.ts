@@ -1,48 +1,25 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import validateData from "../middlewares/validateData.middleware";
-import { entryUserSchema } from "../schemas/users.schema";
+import { userSchemaRequest } from "../schemas/users.schema";
+import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware";
 import {
 	createUserController,
 	deleteUserController,
 	listUserController,
+	resetUserPassController,
+	retrieveUserController,
+	sendEmailUserController,
 	updateUserController,
 } from "../controllers/users.controller";
-import { ensureAuthIsValidMiddleware } from "../middlewares/ensureAuthIsValid.middleware";
-import {
-	resetPassword,
-	sendEmailResetPassword,
-} from "../services/users/resetUserPassword.service";
-import { Repository } from "typeorm";
-import { User } from "../entities";
-import { AppDataSource } from "../data-source";
 
 const usersRoutes: Router = Router();
 
-const sendEmailUserController = async (
-	req: Request,
-	res: Response
-): Promise<Response> => {
-	const email = req.body.email;
-	sendEmailResetPassword(email);
-
-	return res.status(200).json("Email sent!");
-};
-const resetUserPassController = async (
-	req: Request,
-	res: Response
-): Promise<Response> => {
-	const password = req.body.password;
-
-	resetPassword(password, "tokenReset");
-
-	return res.status(200).json("Password changed");
-};
-
-usersRoutes.post("", validateData(entryUserSchema), createUserController);
-usersRoutes.post("/sendemail", sendEmailUserController);
-usersRoutes.post("/resetpass/:resettoken", resetUserPassController);
+usersRoutes.post("", validateData(userSchemaRequest), createUserController);
 usersRoutes.get("", listUserController);
-usersRoutes.delete("/:id", ensureAuthIsValidMiddleware, deleteUserController);
+usersRoutes.get("/:id", retrieveUserController);
 usersRoutes.patch("/:id", ensureAuthIsValidMiddleware, updateUserController);
+usersRoutes.delete("/:id", ensureAuthIsValidMiddleware, deleteUserController);
+usersRoutes.post("/sendemail", sendEmailUserController);
+usersRoutes.post("/resetpassword", resetUserPassController);
 
 export default usersRoutes;

@@ -55,7 +55,7 @@ const resetPasswordTemplate = (
 				button: {
 					color: "#DC4D2F",
 					text: "Reset your password",
-					link: `http://localhost:3000/resetpassword/${resetToken}`,
+					link: `http://localhost:5173/login/newpassword?reset_token=${resetToken}`,
 				},
 			},
 			outro:
