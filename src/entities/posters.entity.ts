@@ -53,7 +53,7 @@ class Poster {
 	@CreateDateColumn({ type: "date" })
 	created_at: string;
 
-	@ManyToOne(() => User)
+	@ManyToOne(() => User, { onDelete: "CASCADE" })
 	user: User;
 
 	@OneToMany(() => Comment, (comment) => comment.poster)
