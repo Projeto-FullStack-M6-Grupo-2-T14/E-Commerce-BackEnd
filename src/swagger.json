@@ -6,19 +6,18 @@
         "contact": {
             "email": "nuno.ribeiro05@hotmail.com"
         },
-        "version": "1.0.0",
-        "servers": [
-            {
-                "url": "http//localhost:3000",
-                "descripítion": "Api de Teste"
-            },
-            {
-                "url": "http//localhost:3000",
-                "descripítion": "Api de Produção"
-            }
-        ]    
-
+        "version": "1.0.0"        
     },
+    "servers": [
+        {
+            "url": "https://api-e-commerce-fullstack-g2-t14.onrender.com/",
+            "description": "Api de Produção"
+        },
+        {
+            "url": "http//localhost:3000",
+            "description": "Api de Teste"
+        }
+    ],
     "paths": {
         "/users": {
             "post": {
@@ -179,7 +178,7 @@
                 "description": "Rota responsável por listar todos os comentários de uma postagem.",
                 "tags": ["Comments"]                
             }
-        }        
+        }      
         
     },
     "components": {
