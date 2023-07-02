@@ -11,9 +11,9 @@ No README, você encontrará instruções detalhadas sobre como configurar e usa
 
 ### 💻 Link da página: [Clique aqui](https://github.com/Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-FrontEnd)
 
-### 💻 Link da API: [Clique aqui](https://github.com/Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-FrontEnd)
+### 💻 Link da API: https://api-e-commerce-fullstack-g2-t14.onrender.com
 
-### 💻 Link da Documentação: [Clique aqui](https://github.com/Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-FrontEnd)
+### 💻 Link da Documentação: [Clique aqui](https://api-e-commerce-fullstack-g2-t14.onrender.com/api-docs/)
 
 ### 💻 Link do repositório Front-end: [Clique aqui](https://github.com/Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-FrontEnd)
 <br>
