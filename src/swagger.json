@@ -10,13 +10,13 @@
     },
     "servers": [
         {
-            "url": "https://api-e-commerce-fullstack-g2-t14.onrender.com/",
-            "description": "Api de Produção"
-        },
-        {
             "url": "http//localhost:3000",
             "description": "Api de Teste"
-        }
+        },
+        {
+            "url": "https://api-e-commerce-fullstack-g2-t14.onrender.com/",
+            "description": "Api de Produção"
+        }        
     ],
     "paths": {
         "/users": {
@@ -28,10 +28,10 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserRequest"
+                                "$ref": "#/components/schemas/User"
                             },
                             "examples": {
-                                "user": {
+                                "user-request": {
                                     "value": {
                                         "name": "João Silva",
                                         "email": "joao@gmail.com",
@@ -55,16 +55,19 @@
                     }
                 },
                 "responses": {
+                    "409": {
+                        "description": "Email already exists"
+                    },
                     "201": {
-                        "description": "OK",
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/UserResponse"
+                                    "$ref": "#/components/schemas/User"
                                 },
                                 "examples": {
-                                    "user": {
+                                    "user-response": {
                                         "value": {
                                             "id": 1,
                                             "name": "João Silva",
@@ -97,142 +100,595 @@
             "get": {
                 "summary": "Listagem de Usuários",
                 "descripition": "Rota responsável por listar todos os usuários cadastrados.",
-                "tags": ["Users"]                
+                "tags": ["Users"],
+                "responses": {                    
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/User"
+                                },
+                                "examples": {
+                                    "user-response": {
+                                        "value": [
+                                            {
+                                                "id": 1,
+                                                "name": "João Silva",
+                                                "email": "joao@gmail.com",
+                                                "password": "1234",
+                                                "cpf": "11122233344",
+                                                "phone": "81988886666",
+                                                "birthday": "01/01/2001",
+                                                "description": "Escrever alguma coisa aqui",
+                                                "address": {
+                                                    "id": 1,
+                                                    "zipcode": "55525000",
+                                                    "state": "Pernambuco",
+                                                    "city": "Recife",
+                                                    "street": "Rua Principal",
+                                                    "number": "123",
+                                                    "complement": "Casa"
+                                                }
+                                            },
+                                            {
+                                                "id": 2,
+                                                "name": "Maria Silva",
+                                                "email": "maria@gmail.com",
+                                                "password": "1234",
+                                                "cpf": "11122233344",
+                                                "phone": "81988886666",
+                                                "birthday": "01/01/2001",
+                                                "description": "Escrever alguma coisa aqui",
+                                                "address": {
+                                                    "id": 2,
+                                                    "zipcode": "55525000",
+                                                    "state": "Pernambuco",
+                                                    "city": "Olinda",
+                                                    "street": "Rua Principal",
+                                                    "number": "123",
+                                                    "complement": "Casa"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+    
+                            }
+
+                        }
+                    }
+                }
+           
             }
         },
         "/users/:id": {
             "get": {
                 "summary": "Capturar informações de Usuário",
                 "description": "Rota responsável por retornar as informações de um usuário especifico.",
-                "tags": ["Users"]                
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "UserId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/User"
+                                },
+                                "examples": {
+                                    "user-response": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "João Silva",
+                                            "email": "joao@gmail.com",
+                                            "password": "1234",
+                                            "cpf": "11122233344",
+                                            "phone": "81988886666",
+                                            "birthday": "01/01/2001",
+                                            "description": "Escrever alguma coisa aqui",
+                                            "address": {
+                                                "id": 1,
+                                                "zipcode": "55525000",
+                                                "state": "Pernambuco",
+                                                "city": "Recife",
+                                                "street": "Rua Principal",
+                                                "number": "123",
+                                                "complement": "Casa"
+                                            }
+                                        }
+                                    }
+                                }
+    
+                            }
+
+                        }
+                    }
+                }
+               
             },
             "patch": {
                 "summary": "Editar informações de Usuário",
                 "description": "Rota responsável por editar as informações de um usuário.",
-                "tags": ["Users"]                
+                "tags": ["Users"],
+                "security": [ { "bearerAuth": [] } ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "UserId",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "examples": {
+                                "user-request": {
+                                    "value": {
+                                        "name": "João JoSé da Silva"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    },
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/User"
+                                },
+                                "examples": {
+                                    "user-response": {
+                                        "value": {
+                                            "id": 1,
+                                            "name": "João JoSé da Silva",
+                                            "email": "joao@gmail.com",
+                                            "password": "1234",
+                                            "cpf": "11122233344",
+                                            "phone": "81988886666",
+                                            "birthday": "01/01/2001",
+                                            "description": "Escrever alguma coisa aqui",
+                                            "address": {
+                                                "id": 1,
+                                                "zipcode": "55525000",
+                                                "state": "Pernambuco",
+                                                "city": "Recife",
+                                                "street": "Rua Principal",
+                                                "number": "123",
+                                                "complement": "Casa"
+                                            }
+                                        }
+                                    }
+                                }
+    
+                            }
+
+                        }
+                    }
+                }
+
+            
             },
             "delete": {
                 "summary": "Excluir um Usuário",
                 "description": "Rota responsável por excluir um usuário.",
-                "tags": ["Users"]                
+                "tags": ["Users"],
+                "security": [ { "bearerAuth": [] } ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "UserId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    },
+                    "204": {
+                        "description": "No body returned for response"
+                    }
+                }             
             }
         },
         "/address/:id": {
             "patch": {
                 "summary": "Editar informações de um Endereço",
                 "description": "Rota responsável por editar as informações de um endereço.",
-                "tags": ["Address"]                
+                "tags": ["Address"],
+                "security": [ { "bearerAuth": [] } ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "AddressId",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Address"
+                            },
+                            "examples": {
+                                "address-request": {
+                                    "value": {
+                                        "street": "Avenida Duque de Caxias"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Address not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    },
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Address"
+                                },
+                                "examples": {
+                                    "user-response": {
+                                        "value": {
+                                            "id": 1,
+                                            "zipcode": "55525000",
+                                            "state": "Pernambuco",
+                                            "city": "Recife",
+                                            "street": "Rua Principal",
+                                            "number": "123",
+                                            "complement": "Casa"
+                                        }
+                                    }
+                                }
+    
+                            }
+
+                        }
+                    }
+                }
+          
             }
         },
         "/login": {
             "post": {
                 "summary": "Login de um usuário",
                 "description": "Rota responsável pela criação de um token de acesso para o usuário.",
-                "tags": ["Login"]                
+                "tags": ["Login"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses": {                    
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Login"
+                                },
+                                "examples": {
+                                    "token": {
+                                        "value": {
+                                            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IknHd4LxexoaFcSeBZ-GQHRmbg4KxY"
+                                        }
+                                    }
+                                }
+    
+                            }
+
+                        }
+                    }
+                }
+              
             }
         },
         "/posters": {
             "post": {
                 "summary": "Cadastro de Anúncio",
                 "description": "Rota responsável pela criação de um anúncio.",
-                "tags": ["Posters"]
+                "tags": ["Posters"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Poster"
+                            }
+                        }
+                    }
+                },
+                "responses": {                    
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Poster"
+                                }
+                            }
+                        }
+            }
+                }
             },
             "get": {
                 "summary": "Listagem de Anúncios",
                 "description": "Rota responsável por listar todos os anúncios cadastrados.",
-                "tags": ["Posters"]
+                "tags": ["Posters"],
+                "responses": {                    
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Poster"
+                                }
+                            }
+                        }
             }
-        },
+                }
+
+            }
+        },                
         "/posters/:id": {
             "get": {
                 "summary": "Capturar informações de um Anúncio",
                 "description": "Rota responsável por retornar as informações de um anúncio especifico.",
-                "tags": ["Posters"]                
+                "tags": ["Posters"],
+                "security": [ { "bearerAuth": [] } ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "PosterId",
+                        "required": true
+                    }
+                ],
+                "responses": {                    
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Poster"
+                                }
+                            }
+                        }
+            }
+                }
+
+              
             },
             "patch": {
                 "summary": "Editar informações de um Anúncio",
                 "description": "Rota responsável por editar as informações de um anúncio.",
-                "tags": ["Posters"]                
+                "tags": ["Posters"],
+                "security": [ { "bearerAuth": [] } ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "PosterId",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Poster"
+                            }
+                        }
+                    }
+                },
+                "responses": { 
+                    "404": {
+                        "description": "Poster not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    },                   
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Poster"
+                                }
+                            }
+                        }
+            }
+                }
+
+               
             },
             "delete": {
                 "summary": "Excluir um Anúncio",
                 "description": "Rota responsável por excluir um anúncio.",
-                "tags": ["Posters"]                
+                "tags": ["Posters"],
+                "security": [ { "bearerAuth": [] } ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "PosterId",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Poster not found"
+                    },
+                    "401": {
+                        "description": "Invalid token"
+                    },
+                    "204": {
+                        "description": "No body returned for response"
+                    }
+                }             
+
+             
             }
         },
         "/users/posters/:id": {
             "get": {
                 "summary": "Listagem de Anúncios de um usuário especifico",
                 "description": "Rota responsável por listar todos os anúncios de um único usuário.",
-                "tags": ["Posters"]                
+                "tags": ["Posters"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "PosterId",
+                        "required": true
+                    }
+                ],
+                "responses": {                    
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Poster"
+                                }
+                            }
+                        }
+            }
+                }
+
+              
             }
         },
         "/comments/:id": {
             "post": {
                 "summary": "Criação de um Comentário",
                 "description": "Rota responsável pela criação de comentários em uma postagem.",
-                "tags": ["Comments"]
+                "tags": ["Comments"],
+                "responses": {  
+                    "404": {
+                        "description": "Poster not found"
+                    },
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Comments"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "get": {
                 "summary": "Listagem de Comentários",
                 "description": "Rota responsável por listar todos os comentários de uma postagem.",
-                "tags": ["Comments"]                
+                "tags": ["Comments"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "PosterId",
+                        "required": true
+                    }
+                ],
+                "responses": {  
+                    "404": {
+                        "description": "Poster not found"
+                    },                    
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Comments"
+                                },
+                                "examples": {
+                                    "comments": {
+                                        "value": [
+                                            {
+                                             "text": "Comentário 1"
+                                            },
+                                            {
+                                             "text": "Comentário 2"
+                                            },
+                                            {
+                                             "text": "Comentário 3"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+            }
+                }
+              
             }
         }      
         
     },
     "components": {
         "schemas": {
-            "UserRequest": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "cpf": {
-                        "type": "string"
-                    },
-                    "phone": {
-                        "type": "string"
-                    },
-                    "birthday": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "address": {
-                        "type": "object",
-                        "properties": {
-                            "zipcode": {
-                                "type": "string"
-                            },
-                            "state": {
-                                "type": "string"
-                            },
-                            "city": {
-                                "type": "string"
-                            },
-                            "street": {
-                                "type": "string"
-                            },
-                            "number": {
-                                "type": "string"
-                            },
-                            "complement": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                }
-            },
-            "UserResponse": {
+            "User": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -286,9 +742,107 @@
                         }
                     }
                 }
-            }
+            },
+            "Address": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "zipcode": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "city": {
+                        "type": "string"
+                    },
+                    "street": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string"
+                    },
+                    "complement": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Poster": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "brand": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "string"
+                    },
+                    "fuel": {
+                        "type": "string"
+                    },
+                    "mileage": {
+                        "type": "string"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "fipe_price": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "cover_image": {
+                        "type": "string"
+                    }
+                }
 
+            },
+            "Login": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Comments": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string"
+                    }
+                }
+            }      
+     
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
         }
     }
+
 }
 

@@ -5,6 +5,7 @@ import addressRoutes from "./address.routes";
 import postersRoutes from "./posters.routes";
 import userPosterRoutes from "./userPosters.routes";
 import commentsRoutes from "./comments.routes";
+import swaggerRoutes from "./swagger.routes";
 
 export const mainRoutes: Router = Router();
 
@@ -14,3 +15,4 @@ mainRoutes.use("/address", addressRoutes)
 mainRoutes.use("/posters", postersRoutes)
 mainRoutes.use("/users/posters", userPosterRoutes)
 mainRoutes.use("/comments", commentsRoutes)
+mainRoutes.use("/api-docs", swaggerRoutes)
