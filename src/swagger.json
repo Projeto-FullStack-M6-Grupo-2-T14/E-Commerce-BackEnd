@@ -23,7 +23,7 @@
         "/users": {
             "post": {
                 "summary": "Cadastro de Usuário",
-                "descripition": "Rota responsável pela criação de um usuário.",
+                "description": "Rota responsável pela criação de um usuário.",
                 "tags": ["Users"],
                 "requestBody": {
                     "content": {
@@ -99,13 +99,88 @@
                 "summary": "Listagem de Usuários",
                 "descripition": "Rota responsável por listar todos os usuários cadastrados.",
                 "tags": ["Users"]                
-            },
+            }
+        },
+        "/users/:id": {
             "get": {
-                "summary": "Capiturar informações de Usuário",
-                "descripition": "Rota responsável por listar todos os usuários cadastrados.",
+                "summary": "Capturar informações de Usuário",
+                "description": "Rota responsável por retornar as informações de um usuário especifico.",
+                "tags": ["Users"]                
+            },
+            "patch": {
+                "summary": "Editar informações de Usuário",
+                "description": "Rota responsável por editar as informações de um usuário.",
+                "tags": ["Users"]                
+            },
+            "delete": {
+                "summary": "Excluir um Usuário",
+                "description": "Rota responsável por excluir um usuário.",
                 "tags": ["Users"]                
             }
-        }
+        },
+        "/address/:id": {
+            "patch": {
+                "summary": "Editar informações de um Endereço",
+                "description": "Rota responsável por editar as informações de um endereço.",
+                "tags": ["Address"]                
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login de um usuário",
+                "description": "Rota responsável pela criação de um token de acesso para o usuário.",
+                "tags": ["Login"]                
+            }
+        },
+        "/posters": {
+            "post": {
+                "summary": "Cadastro de Anúncio",
+                "description": "Rota responsável pela criação de um anúncio.",
+                "tags": ["Posters"]
+            },
+            "get": {
+                "summary": "Listagem de Anúncios",
+                "description": "Rota responsável por listar todos os anúncios cadastrados.",
+                "tags": ["Posters"]
+            }
+        },
+        "/posters/:id": {
+            "get": {
+                "summary": "Capturar informações de um Anúncio",
+                "description": "Rota responsável por retornar as informações de um anúncio especifico.",
+                "tags": ["Posters"]                
+            },
+            "patch": {
+                "summary": "Editar informações de um Anúncio",
+                "description": "Rota responsável por editar as informações de um anúncio.",
+                "tags": ["Posters"]                
+            },
+            "delete": {
+                "summary": "Excluir um Anúncio",
+                "description": "Rota responsável por excluir um anúncio.",
+                "tags": ["Posters"]                
+            }
+        },
+        "/users/posters/:id": {
+            "get": {
+                "summary": "Listagem de Anúncios de um usuário especifico",
+                "description": "Rota responsável por listar todos os anúncios de um único usuário.",
+                "tags": ["Posters"]                
+            }
+        },
+        "/comments/:id": {
+            "post": {
+                "summary": "Criação de um Comentário",
+                "description": "Rota responsável pela criação de comentários em uma postagem.",
+                "tags": ["Comments"]
+            },
+            "get": {
+                "summary": "Listagem de Comentários",
+                "description": "Rota responsável por listar todos os comentários de uma postagem.",
+                "tags": ["Comments"]                
+            }
+        }        
+        
     },
     "components": {
         "schemas": {
@@ -217,3 +292,4 @@
         }
     }
 }
+
