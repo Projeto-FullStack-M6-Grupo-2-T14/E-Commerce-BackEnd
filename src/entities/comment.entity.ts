@@ -14,7 +14,7 @@ class Comment {
     @ManyToOne(() => User)
     user: User
 
-    @ManyToOne(() => Poster)
+    @ManyToOne(() => Poster, { onDelete: "CASCADE" })
     poster: Poster
 
 }
