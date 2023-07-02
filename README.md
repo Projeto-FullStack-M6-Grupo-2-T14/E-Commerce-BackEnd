@@ -9,9 +9,9 @@ Esta API foi desenvolvida utilizando tecnologias modernas, como Node.js, Express
 
 No README, você encontrará instruções detalhadas sobre como configurar e usar a API, juntamente com exemplos de solicitações e respostas. Siga as orientações fornecidas para começar a utilizar a API de MotorsShop de forma eficiente.
 
-### 💻 Link da página: [Clique aqui](https://github.com/Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-FrontEnd)
+### 💻 BaseUrl: https://api-e-commerce-fullstack-g2-t14.onrender.com
 
-### 💻 Link da API: https://api-e-commerce-fullstack-g2-t14.onrender.com
+### 💻 Link da página: [Clique aqui](https://github.com/Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-FrontEnd)
 
 ### 💻 Link da Documentação: [Clique aqui](https://api-e-commerce-fullstack-g2-t14.onrender.com/api-docs/)
 
