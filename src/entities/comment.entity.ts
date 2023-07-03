@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./users.entity";
 import { Poster } from "./posters.entity";
 
@@ -10,6 +10,9 @@ class Comment {
 
     @Column({type: "varchar", length: 600})
     text: string
+
+    @CreateDateColumn({ type: "date" })
+	created_at: string
 
     @ManyToOne(() => User)
     user: User

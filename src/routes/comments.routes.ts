@@ -8,6 +8,6 @@ import { commentSchemaRequest } from "../schemas/comments.schema";
 const commentsRoutes: Router = Router()
 
 commentsRoutes.post('/:id', validateData(commentSchemaRequest), ensureAuthIsValidMiddleware, createCommentController)
-commentsRoutes.get('/:id', listCommentController)
+commentsRoutes.get('/:id', ensureAuthIsValidMiddleware, listCommentController)
 
 export default commentsRoutes

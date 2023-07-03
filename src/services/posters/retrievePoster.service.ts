@@ -19,6 +19,7 @@ const retrievePosterServices = async (posterId: number) => {
         "user.description",
         "comments.id",
         "comments.text",
+        "comments.created_at",
         "commentUser.id",
         "commentUser.name"
     ])
