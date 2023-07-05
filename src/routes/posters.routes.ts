@@ -14,7 +14,7 @@ const postersRoutes: Router = Router();
 
 postersRoutes.post("", ensureAuthIsValidMiddleware, validateData(posterSchemaRequest), createPosterController);
 postersRoutes.get("", listAllPostersController);
-postersRoutes.get("/:id", ensureAuthIsValidMiddleware, retrievePosterController);
+postersRoutes.get("/:id", retrievePosterController);
 postersRoutes.patch("/:id", ensureAuthIsValidMiddleware, validateData(updatePosterSchema), updatePosterController);
 postersRoutes.delete("/:id", ensureAuthIsValidMiddleware, deletePostersController);
 
