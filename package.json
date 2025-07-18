@@ -5,6 +5,7 @@
 	"repository": "git@github.com:Projeto-FullStack-M6-Grupo-2-T14/E-Commerce-BackEnd.git",
 	"author": "<nuno.ribeiro05@hotmail.com>",
 	"license": "MIT",
+	"type": "module",
 	"dependencies": {
 		"@nestjs/swagger": "^7.4.2",
 		"bcryptjs": "^2.4.3",
