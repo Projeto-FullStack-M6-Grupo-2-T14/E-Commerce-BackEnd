@@ -15,10 +15,15 @@ RUN npm install
 # Copie todo o resto do código do seu projeto para o diretório de trabalho
 COPY . .
 
+# ---> PASSO 1: COMPILE O CÓDIGO TYPESCRIPT <---
+# Este comando executa o script "build" do seu package.json
+RUN npm run build
+
 # Exponha a porta em que sua aplicação roda (ex: 3000, 8080, etc.)
 # Troque 3000 pela porta que seu servidor usa
 EXPOSE 3000
 
+# ---> PASSO 2: INICIE A APLICAÇÃO COMPILADA <---
 # O comando para iniciar sua aplicação quando o contêiner for executado
-CMD [ "node", "src/server.ts" ]
-# ou "npm", "start" se você tiver um script de start no seu package.json
+# Ele vai executar o script "start" do seu package.json
+CMD [ "npm", "start" ]
