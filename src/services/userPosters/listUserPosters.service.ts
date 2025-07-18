@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { Poster } from "../../entities.js";
+import { Poster } from "../../entities/index.js";
 import { TListPosters } from "../../interfaces/posters.interface.js";
 import { AppDataSource } from "../../data-source.js";
 import { listAllPostersSchema } from "../../schemas/posters.schema.js";

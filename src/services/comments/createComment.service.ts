@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { Comment, Poster, User } from "../../entities.js";
+import { Comment, Poster, User } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { AppError } from "../../error.js";
 import { commentSchema } from "../../schemas/comments.schema.js";

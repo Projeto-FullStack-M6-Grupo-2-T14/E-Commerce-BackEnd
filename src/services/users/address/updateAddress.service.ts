@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { Address } from "../../../entities.js";
+import { Address } from "../../../entities/index.js";
 import { AppDataSource } from "../../../data-source.js";
 import { AppError } from "../../../error.js";
 import {

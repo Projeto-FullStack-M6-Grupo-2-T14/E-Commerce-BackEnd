@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { User } from "../../entities.js";
+import { User } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { AppError } from "../../error.js";
 import { userResponse } from "../../schemas/users.schema.js";

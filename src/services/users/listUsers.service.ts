@@ -1,6 +1,6 @@
 import { listAllUsersSchema } from "../../schemas/users.schema.js";
 import { Repository } from "typeorm";
-import { User } from "../../entities.js";
+import { User } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { TListUsers } from "../../interfaces/users.interface.js";
 

@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { User } from "../../entities.js";
+import { User } from "../../entities/index.js";
 import { listUserSchemaResponse } from "../../schemas/users.schema.js";
 import { TUpdateUserResponse } from "../../interfaces/users.interface.js";
 import { AppError } from "../../error.js";

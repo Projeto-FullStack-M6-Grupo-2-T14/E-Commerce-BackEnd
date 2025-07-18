@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { Poster } from "../../entities.js";
+import { Poster } from "../../entities/index.js";
 import { AppError } from "../../error.js";
 
 const retrievePosterServices = async (posterId: number) => {

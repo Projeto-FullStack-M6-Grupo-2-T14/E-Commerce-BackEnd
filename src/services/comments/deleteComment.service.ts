@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { Comment } from "../../entities.js";
+import { Comment } from "../../entities/index.js";
 import { AppError } from "../../error.js";
 
 const deleteCommentService = async (

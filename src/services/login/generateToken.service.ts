@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { Repository } from "typeorm";
 import { compare } from "bcryptjs";
 import { AppDataSource } from "../../data-source.js";
-import { User } from "../../entities.js";
+import { User } from "../../entities/index.js";
 import { AppError } from "../../error.js";
 
 interface IGenerateToken {

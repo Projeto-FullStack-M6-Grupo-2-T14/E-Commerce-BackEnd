@@ -1,5 +1,5 @@
 import { Repository } from "typeorm";
-import { Comment, Poster } from "../../entities.js";
+import { Comment, Poster } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { TListComments } from "../../interfaces/comment.interfaces.js";
 import { commentSchemaResponseList } from "../../schemas/comments.schema.js";
