@@ -23,7 +23,7 @@
 		"zod": "^3.25.76"
 	},
 	"scripts": {
-		"build": "tsc",
+		"build": "tsc && cp src/swagger.json dist/swagger.json",
 		"start": "node dist/server.js",
 		"test": "jest --verbose --runInBand",
 		"typeorm": "typeorm-ts-node-commonjs",
