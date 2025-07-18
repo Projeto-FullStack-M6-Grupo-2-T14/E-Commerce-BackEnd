@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import app from "./app.js";
 import "dotenv/config";
 import { AppDataSource } from "./data-source.js";
