@@ -3,7 +3,7 @@ import { AppDataSource } from "../../data-source.js";
 import { User } from "../../entities/index.js";
 import { AppError } from "../../error.js";
 import { randomUUID } from "crypto";
-import { hashSync } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import {
 	resetPasswordTemplate,
 	sendEmail,
@@ -54,7 +54,7 @@ const resetPassword = async (password: string, resetToken: string) => {
 			id: user.id,
 		},
 		{
-			password: hashSync(password, 10),
+			password: bcryptjs.hashSync(password, 10),
 			reset_password: null,
 		}
 	);
