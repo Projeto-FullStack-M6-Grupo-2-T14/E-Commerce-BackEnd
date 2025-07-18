@@ -1,8 +1,8 @@
-import { Repository } from "typeorm";
-import { Poster } from "../../entities/index.js";
+import { Repository } from "typeorm"; 
 import { TListPosters } from "../../interfaces/posters.interface.js";
 import { AppDataSource } from "../../data-source.js";
 import { listAllPostersSchema } from "../../schemas/posters.schema.js";
+import { Poster } from "../../entities/posters.entity.js";
 
 const listUserPostersService = async (
 	userId: number

@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { User } from "../../entities/index.js";
 import { AppError } from "../../error.js";
+import { User } from "../../entities/users.entity.js";
 
 export const deleteUserServices = async (userId: number): Promise<void> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);

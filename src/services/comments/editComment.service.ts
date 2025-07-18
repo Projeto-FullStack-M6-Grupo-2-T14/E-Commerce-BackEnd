@@ -1,9 +1,10 @@
 import { Repository } from "typeorm";
-import { Comment, User } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { TUpdateCommentResponse } from "../../interfaces/comment.interfaces.js";
 import { AppError } from "../../error.js";
 import { commentSchemaResponse } from "../../schemas/comments.schema.js";
+import { Comment } from "../../entities/comment.entity.js";
+import { User } from "../../entities/users.entity.js";
 
 const editCommentsService = async (
 	userId: number,

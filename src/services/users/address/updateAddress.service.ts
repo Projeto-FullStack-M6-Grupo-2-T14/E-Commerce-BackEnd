@@ -1,5 +1,4 @@
 import { Repository } from "typeorm";
-import { Address } from "../../../entities/index.js";
 import { AppDataSource } from "../../../data-source.js";
 import { AppError } from "../../../error.js";
 import {
@@ -7,6 +6,7 @@ import {
 	TUpdateAddress,
 } from "../../../interfaces/address.interfaces.js";
 import { addressSchema } from "../../../schemas/address.schema.js";
+import { Address } from "../../../entities/address.entity.js";
 
 export const updateAddressServices = async (
 	payload: TUpdateAddress,

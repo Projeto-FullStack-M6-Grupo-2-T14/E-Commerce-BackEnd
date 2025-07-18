@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../data-source.js";
-import { Poster } from "../../entities/index.js";
+import { AppDataSource } from "../../data-source.js"; 
 import { AppError } from "../../error.js";
+import { Poster } from "../../entities/posters.entity.js";
 
 const retrievePosterServices = async (posterId: number) => {
 	const posterRepository: Repository<Poster> =

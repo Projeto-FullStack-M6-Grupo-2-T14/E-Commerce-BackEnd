@@ -1,12 +1,12 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { Poster } from "../../entities/index.js";
 import { AppError } from "../../error.js";
 import { updateSchemaResponse } from "../../schemas/posters.schema.js";
 import {
 	TUpdatePoster,
 	TUpdatePosterResponse,
 } from "../../interfaces/posters.interface.js";
+import { Poster } from "../../entities/posters.entity.js";
 
 const updatePosterService = async (
 	payload: TUpdatePoster,

@@ -1,8 +1,9 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { Poster, User } from "../../entities/index.js";
 import { posterSchema } from "../../schemas/posters.schema.js";
 import { TExitPoster } from "../../interfaces/posters.interface.js";
+import { Poster } from "../../entities/posters.entity.js";
+import { User } from "../../entities/users.entity.js";
 
 const createPosterServices = async (
 	payload: any,

@@ -1,9 +1,11 @@
 import { Repository } from "typeorm";
-import { Comment, Poster, User } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { AppError } from "../../error.js";
 import { commentSchema } from "../../schemas/comments.schema.js";
 import { TCommentResponse } from "../../interfaces/comment.interfaces.js";
+import { Poster } from "../../entities/posters.entity.js";
+import { User } from "../../entities/users.entity.js";
+import { Comment } from "../../entities/comment.entity.js";
 
 const createCommentService = async (
 	userId: number,

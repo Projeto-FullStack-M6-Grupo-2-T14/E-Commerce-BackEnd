@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source.js";
-import { Poster } from "../../entities/index.js";
 import { TListPosters } from "../../interfaces/posters.interface.js";
 import { listAllPostersSchema } from "../../schemas/posters.schema.js";
+import { Poster } from "../../entities/posters.entity.js";
 
 const listAllPostersService = async (): Promise<TListPosters> => {
 	const postersRepository: Repository<Poster> =

@@ -1,8 +1,8 @@
 import { Repository } from "typeorm";
-import { User } from "../entities/index.js";
 import { NextFunction, Request, Response } from "express";
 import { AppDataSource } from "../data-source.js";
 import { AppError } from "../error.js";
+import { User } from "../entities/users.entity.js";
 
 const isUserOrOwner = async (
 	req: Request,

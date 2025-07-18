@@ -1,12 +1,13 @@
 import { DeepPartial, Repository } from "typeorm";
-import { AppDataSource } from "../../data-source.js";
-import { Address, User } from "../../entities/index.js";
+import { AppDataSource } from "../../data-source.js"; 
 import { AppError } from "../../error.js";
 import {
 	TUserRequest,
 	TUserResponse,
 } from "../../interfaces/users.interface.js";
 import { userSchemaResponse } from "../../schemas/users.schema.js";
+import { User } from "../../entities/users.entity.js";
+import { Address } from "../../entities/address.entity.js";
 
 export const createUserServices = async (
 	payload: TUserRequest

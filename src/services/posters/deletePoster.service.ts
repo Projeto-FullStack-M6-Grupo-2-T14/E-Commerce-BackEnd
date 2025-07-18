@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source.js";
-import { Poster } from "../../entities/index.js";
 import { Repository } from "typeorm";
 import { AppError } from "../../error.js";
+import { Poster } from "../../entities/posters.entity.js";
 
 const deletePostersService = async (posterId: number) => {
 	const posterRepository: Repository<Poster> =

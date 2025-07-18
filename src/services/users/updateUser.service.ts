@@ -1,5 +1,4 @@
-import { Repository } from "typeorm";
-import { User } from "../../entities/index.js";
+import { Repository } from "typeorm"; 
 import { AppDataSource } from "../../data-source.js";
 import { AppError } from "../../error.js";
 import { userResponse } from "../../schemas/users.schema.js";
@@ -7,6 +6,7 @@ import {
 	TUpdateUserResponse,
 	TUserPartial,
 } from "../../interfaces/users.interface.js";
+import { User } from "../../entities/users.entity.js";
 
 export const updateUserServices = async (
 	payload: TUserPartial,

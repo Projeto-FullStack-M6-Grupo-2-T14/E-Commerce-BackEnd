@@ -1,9 +1,10 @@
 import { Repository } from "typeorm";
-import { Comment, Poster } from "../../entities/index.js";
 import { AppDataSource } from "../../data-source.js";
 import { TListComments } from "../../interfaces/comment.interfaces.js";
 import { commentSchemaResponseList } from "../../schemas/comments.schema.js";
 import { AppError } from "../../error.js";
+import { Comment } from "../../entities/comment.entity.js";
+import { Poster } from "../../entities/posters.entity.js";
 
 const listCommentsService = async (
 	posterId: number
