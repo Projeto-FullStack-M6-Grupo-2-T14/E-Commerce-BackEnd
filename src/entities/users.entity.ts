@@ -1,14 +1,17 @@
+// src/entities/users.entity.ts
 import {
 	BeforeInsert,
 	BeforeUpdate,
 	Column,
 	Entity,
 	OneToMany,
+	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Poster } from "./posters.entity.js";
 import bcrypt from "bcryptjs";
+import { Poster } from "./posters.entity.js";
 import { Comment } from "./comment.entity.js";
+import { Address } from "./address.entity.js";
 
 @Entity("users")
 class User {
@@ -24,7 +27,7 @@ class User {
 	@Column({ type: "varchar", length: 120 })
 	password: string;
 
-	@Column({ length: 11, unique: true })
+	@Column({ type: "varchar", length: 11, unique: true })
 	cpf: string;
 
 	@Column({ type: "varchar", length: 12 })
@@ -33,20 +36,23 @@ class User {
 	@Column({ type: "date" })
 	birthday: string;
 
-	@Column({ length: 500 })
+	@Column({ type: "text", length: 500 })
 	description: string;
 
-	@Column({ default: false })
+	@Column({ type: "boolean", default: false })
 	is_seller: boolean;
 
 	@Column({ type: "varchar", nullable: true })
 	reset_password: string | null;
 
-	@OneToMany(() => Poster, (poster) => poster.user)
+	@OneToMany("Poster", (poster: Poster) => poster.user)
 	poster: Poster[];
 
-	@OneToMany(() => Comment, (comment) => comment.user)
+	@OneToMany("Comment", (comment: Comment) => comment.user)
 	comments: Comment[];
+
+	@OneToOne("Address", (address: Address) => address.user)
+	address: Address;
 
 	@BeforeInsert()
 	@BeforeUpdate()

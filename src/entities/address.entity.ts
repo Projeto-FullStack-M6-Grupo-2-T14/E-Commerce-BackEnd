@@ -12,25 +12,25 @@ class Address {
 	@PrimaryGeneratedColumn("increment")
 	id: number;
 
-	@Column({ length: 8 })
+	@Column({ type: "varchar", length: 8 })
 	zipcode: string;
 
-	@Column({ length: 80 })
+	@Column({ type: "varchar", length: 80 })
 	state: string;
 
-	@Column({ length: 120 })
+	@Column({ type: "varchar", length: 120 })
 	city: string;
 
-	@Column({ length: 150 })
+	@Column({ type: "varchar", length: 150 })
 	street: string;
 
-	@Column({ length: 8 })
+	@Column({ type: "varchar", length: 8 })
 	number: string;
 
-	@Column({ length: 200 })
+	@Column({ type: "varchar", length: 200 })
 	complement: string;
 
-	@OneToOne(() => User, { onDelete: "CASCADE" })
+	@OneToOne("User", { onDelete: "CASCADE" })
 	@JoinColumn()
 	user: User;
 }
