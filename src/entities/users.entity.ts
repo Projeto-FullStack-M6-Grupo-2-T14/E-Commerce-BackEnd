@@ -36,7 +36,7 @@ class User {
 	@Column({ type: "date" })
 	birthday: string;
 
-	@Column({ type: "text", length: 500 })
+	@Column({ type: "text" })
 	description: string;
 
 	@Column({ type: "boolean", default: false })
