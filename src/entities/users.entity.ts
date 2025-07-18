@@ -7,7 +7,7 @@ import {
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { Poster } from "./posters.entity.js";
-import { getRounds, hashSync } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { Comment } from "./comment.entity.js";
 
 @Entity("users")
@@ -51,9 +51,9 @@ class User {
 	@BeforeInsert()
 	@BeforeUpdate()
 	hashPassword() {
-		const isEncrypted = getRounds(this.password);
+		const isEncrypted = bcrypt.getRounds(this.password);
 		if (!isEncrypted) {
-			this.password = hashSync(this.password, 10);
+			this.password = bcrypt.hashSync(this.password, 10);
 		}
 	}
 }
