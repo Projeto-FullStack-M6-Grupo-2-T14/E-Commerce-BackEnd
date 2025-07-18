@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Repository } from "typeorm";
-import { compare } from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { AppDataSource } from "../../data-source.js";
 import { User } from "../../entities/index.js";
 import { AppError } from "../../error.js";
@@ -25,7 +25,7 @@ const generateTokenService = async ({
 		throw new AppError("Invalid credentials", 403);
 	}
 
-	const passwordMatch = await compare(password, user.password);
+	const passwordMatch = await bcryptjs.compare(password, user.password);
 
 	if (!passwordMatch) {
 		throw new AppError("Invalid credentials", 403);
