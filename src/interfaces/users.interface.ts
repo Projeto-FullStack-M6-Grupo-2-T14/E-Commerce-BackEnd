@@ -7,7 +7,7 @@ import {
 	userSchemaRequest,
 	userSchemaResponse,
 	userUpdateSchemaRequest,
-} from "../schemas/users.schema";
+} from "../schemas/users.schema.js";
 
 export type TUser = z.infer<typeof userSchema>;
 export type TUserRequest = z.infer<typeof userSchemaRequest>;

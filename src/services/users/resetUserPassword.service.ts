@@ -1,10 +1,13 @@
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entities";
-import { AppError } from "../../error";
+import { AppDataSource } from "../../data-source.js";
+import { User } from "../../entities.js";
+import { AppError } from "../../error.js";
 import { randomUUID } from "crypto";
 import { hashSync } from "bcryptjs";
-import { resetPasswordTemplate, sendEmail } from "../../utils/sendEmail.utils";
+import {
+	resetPasswordTemplate,
+	sendEmail,
+} from "../../utils/sendEmail.utils.js";
 
 const sendEmailResetPassword = async (email: string) => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);

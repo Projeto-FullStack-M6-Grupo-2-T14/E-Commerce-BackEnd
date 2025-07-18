@@ -1,7 +1,14 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany,	PrimaryGeneratedColumn } from "typeorm";
-import { Poster } from "./posters.entity";
+import {
+	BeforeInsert,
+	BeforeUpdate,
+	Column,
+	Entity,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from "typeorm";
+import { Poster } from "./posters.entity.js";
 import { getRounds, hashSync } from "bcryptjs";
-import { Comment } from "./comment.entity";
+import { Comment } from "./comment.entity.js";
 
 @Entity("users")
 class User {
@@ -39,8 +46,7 @@ class User {
 	poster: Poster[];
 
 	@OneToMany(() => Comment, (comment) => comment.user)
-	comments: Comment[]
-
+	comments: Comment[];
 
 	@BeforeInsert()
 	@BeforeUpdate()

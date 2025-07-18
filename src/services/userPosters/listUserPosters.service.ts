@@ -1,20 +1,23 @@
-import { Repository } from 'typeorm';
-import { Poster } from '../../entities';
-import { TListPosters } from '../../interfaces/posters.interface';
-import { AppDataSource } from '../../data-source';
-import { listAllPostersSchema } from '../../schemas/posters.schema';
+import { Repository } from "typeorm";
+import { Poster } from "../../entities.js";
+import { TListPosters } from "../../interfaces/posters.interface.js";
+import { AppDataSource } from "../../data-source.js";
+import { listAllPostersSchema } from "../../schemas/posters.schema.js";
 
-const listUserPostersService = async (userId: number): Promise<TListPosters> => {
-  const postersRepository: Repository<Poster> = AppDataSource.getRepository(Poster);
+const listUserPostersService = async (
+	userId: number
+): Promise<TListPosters> => {
+	const postersRepository: Repository<Poster> =
+		AppDataSource.getRepository(Poster);
 
-  const posters: Poster[] = await postersRepository.find({
-    where: { user: { id: userId } },
-    relations: ['user'],
-  });
+	const posters: Poster[] = await postersRepository.find({
+		where: { user: { id: userId } },
+		relations: ["user"],
+	});
 
-  //return listAllPostersSchema.parse(posters);;
+	//return listAllPostersSchema.parse(posters);;
 
-  return posters
+	return posters;
 };
 
 export default listUserPostersService;

@@ -1,53 +1,52 @@
 import { z } from "zod";
-import { addressSchemaRequest } from "./address.schema";
+import { addressSchemaRequest } from "./address.schema.js";
 
 export const userSchema = z.object({
-    id: z.number(),
-    name: z.string().max(100),
-    email: z.string().max(60),
-    password: z.string().max(120),
-    cpf: z.string().max(11),
-    phone: z.string().max(12),
-    birthday: z.string(z.date()),
-    description: z.string().max(500),
-    is_seller: z.boolean().default(false),
-    address: addressSchemaRequest
+	id: z.number(),
+	name: z.string().max(100),
+	email: z.string().max(60),
+	password: z.string().max(120),
+	cpf: z.string().max(11),
+	phone: z.string().max(12),
+	birthday: z.string(z.date()),
+	description: z.string().max(500),
+	is_seller: z.boolean().default(false),
+	address: addressSchemaRequest,
 });
 
 export const userSchemaRequest = userSchema.omit({
-  id: true,
+	id: true,
 });
 
 export const userSchemaResponse = userSchema.omit({
-    password: true,
+	password: true,
 });
 
 export const userUpdateSchemaRequest = userSchema.omit({
-    id: true,
-    address: true,
-  });
-  
+	id: true,
+	address: true,
+});
+
 export const userResponse = userSchema.omit({
-    password: true,
-    address: true
+	password: true,
+	address: true,
 });
 
 export const listUserSchemaResponse = userSchema.omit({
-    address: true,
+	address: true,
 });
 
 export const userSchemaResponseOnComment = userSchema.omit({
-    email: true,
-    password: true,
-    cpf: true,
-    phone: true,
-    birthday: true,
-    description: true,
-    is_seller: true,
-    address: true,
-})
+	email: true,
+	password: true,
+	cpf: true,
+	phone: true,
+	birthday: true,
+	description: true,
+	is_seller: true,
+	address: true,
+});
 
 export const userSchemaUpdate = listUserSchemaResponse.partial();
 
-export const listAllUsersSchema = listUserSchemaResponse.array()
-
+export const listAllUsersSchema = listUserSchemaResponse.array();

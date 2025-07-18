@@ -1,5 +1,5 @@
 import { createTransport } from "nodemailer";
-import { AppError } from "../error";
+import { AppError } from "../error.js";
 import Mailgen from "mailgen";
 
 interface IEmailRequest {

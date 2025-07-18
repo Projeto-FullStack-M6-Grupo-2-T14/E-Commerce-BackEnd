@@ -23,6 +23,7 @@
 		"zod": "^3.25.76"
 	},
 	"scripts": {
+		"build": "tsc",
 		"test": "jest --verbose --runInBand",
 		"typeorm": "typeorm-ts-node-commonjs",
 		"dev": "ts-node-dev --ignore-watch node_modules --rs --cls src/server.ts"

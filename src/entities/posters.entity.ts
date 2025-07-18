@@ -6,8 +6,8 @@ import {
 	ManyToOne,
 	OneToMany,
 } from "typeorm";
-import { User } from "./users.entity";
-import { Comment } from "./comment.entity";
+import { User } from "./users.entity.js";
+import { Comment } from "./comment.entity.js";
 
 @Entity("posters")
 class Poster {
@@ -57,7 +57,7 @@ class Poster {
 	user: User;
 
 	@OneToMany(() => Comment, (comment) => comment.poster)
-	comments: Comment[]
+	comments: Comment[];
 }
 
 export { Poster };

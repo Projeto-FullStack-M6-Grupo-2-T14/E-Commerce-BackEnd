@@ -1,7 +1,6 @@
-import { Poster } from '../entities/posters.entity'
-import { User } from '../entities/users.entity'
-import { Address } from './address.entity'
-import { Comment } from './comment.entity'
+import { Poster } from "../entities/posters.entity.js";
+import { User } from "../entities/users.entity.js";
+import { Address } from "./address.entity.js";
+import { Comment } from "./comment.entity.js";
 
-
-export { Poster, User, Address, Comment }
+export { Poster, User, Address, Comment };

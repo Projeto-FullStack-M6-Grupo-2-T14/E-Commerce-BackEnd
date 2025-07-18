@@ -1,8 +1,8 @@
-import { listAllUsersSchema } from "../../schemas/users.schema";
+import { listAllUsersSchema } from "../../schemas/users.schema.js";
 import { Repository } from "typeorm";
-import { User } from "../../entities";
-import { AppDataSource } from "../../data-source";
-import { TListUsers } from "../../interfaces/users.interface";
+import { User } from "../../entities.js";
+import { AppDataSource } from "../../data-source.js";
+import { TListUsers } from "../../interfaces/users.interface.js";
 
 export const listUserServices = async (): Promise<TListUsers> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);

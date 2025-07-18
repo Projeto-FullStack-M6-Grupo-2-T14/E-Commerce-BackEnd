@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entities";
-import { listUserSchemaResponse } from "../../schemas/users.schema";
-import { TUpdateUserResponse } from "../../interfaces/users.interface";
-import { AppError } from "../../error";
+import { AppDataSource } from "../../data-source.js";
+import { User } from "../../entities.js";
+import { listUserSchemaResponse } from "../../schemas/users.schema.js";
+import { TUpdateUserResponse } from "../../interfaces/users.interface.js";
+import { AppError } from "../../error.js";
 
 export const retrieveUserServices = async (
 	userId: number

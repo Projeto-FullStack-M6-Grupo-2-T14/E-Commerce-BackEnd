@@ -1,12 +1,15 @@
 import { Request, Response } from "express";
-import { TListPosters } from "../interfaces/posters.interface";
-import listUserPostersService from "../services/userPosters/listUserPosters.service";
+import { TListPosters } from "../interfaces/posters.interface.js";
+import listUserPostersService from "../services/userPosters/listUserPosters.service.js";
 
-const listUserPostersController = async (req: Request, res: Response): Promise<Response> => {
-    const userId: number = parseInt(req.params.id)
-    const getPosters: TListPosters = await listUserPostersService(userId);
-  
-    return res.status(200).json(getPosters);
-  };
+const listUserPostersController = async (
+	req: Request,
+	res: Response
+): Promise<Response> => {
+	const userId: number = parseInt(req.params.id);
+	const getPosters: TListPosters = await listUserPostersService(userId);
 
-export default listUserPostersController
+	return res.status(200).json(getPosters);
+};
+
+export default listUserPostersController;

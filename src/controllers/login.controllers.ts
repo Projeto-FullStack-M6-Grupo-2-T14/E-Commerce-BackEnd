@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { generateTokenService } from "../services/login/generateToken.service";
+import { generateTokenService } from "../services/login/generateToken.service.js";
 
 const generateTokenController = async (req: Request, res: Response) => {
 	const { email, password } = req.body;
@@ -8,6 +8,4 @@ const generateTokenController = async (req: Request, res: Response) => {
 	return res.json({ token });
 };
 
-
-
-export default generateTokenController 
+export default generateTokenController;

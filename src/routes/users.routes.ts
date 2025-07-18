@@ -1,7 +1,7 @@
 import { Router } from "express";
-import validateData from "../middlewares/validateData.middleware";
-import { userSchemaRequest } from "../schemas/users.schema";
-import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware";
+import validateData from "../middlewares/validateData.middleware.js";
+import { userSchemaRequest } from "../schemas/users.schema.js";
+import ensureAuthIsValidMiddleware from "../middlewares/ensureAuthIsValid.middleware.js";
 import {
 	createUserController,
 	deleteUserController,
@@ -10,7 +10,7 @@ import {
 	retrieveUserController,
 	sendEmailUserController,
 	updateUserController,
-} from "../controllers/users.controller";
+} from "../controllers/users.controller.js";
 
 const usersRoutes: Router = Router();
 

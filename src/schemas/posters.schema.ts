@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { userSchemaResponseOnComment } from "./users.schema";
+import { userSchemaResponseOnComment } from "./users.schema.js";
 
 const posterSchema = z.object({
 	id: z.number(),
@@ -16,16 +16,16 @@ const posterSchema = z.object({
 	cover_image: z.string().nullish(),
 	is_active: z.boolean().default(false),
 	created_at: z.string(),
-	user: userSchemaResponseOnComment
+	user: userSchemaResponseOnComment,
 });
 
 const posterSchemaRequest = posterSchema.omit({
 	id: true,
 	created_at: true,
-	user: true
-})
+	user: true,
+});
 
-const updatePosterSchema = posterSchemaRequest.partial()
+const updatePosterSchema = posterSchemaRequest.partial();
 
 const updateSchemaResponse = posterSchema.omit({
 	user: true,
@@ -47,14 +47,14 @@ const posterSchemaResponseOnComment = posterSchema.omit({
 	cover_image: true,
 	is_active: true,
 	created_at: true,
-	user: true
-})
+	user: true,
+});
 
-export { 
-	posterSchema, 
-	posterSchemaRequest, 
-	posterSchemaResponseOnComment, 
-	listAllPostersSchema, 
-	updateSchemaResponse, 
-	updatePosterSchema 
+export {
+	posterSchema,
+	posterSchemaRequest,
+	posterSchemaResponseOnComment,
+	listAllPostersSchema,
+	updateSchemaResponse,
+	updatePosterSchema,
 };

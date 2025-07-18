@@ -1,26 +1,29 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./users.entity";
-import { Poster } from "./posters.entity";
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./users.entity.js";
+import { Poster } from "./posters.entity.js";
 
-
-@Entity('Comment')
+@Entity("Comment")
 class Comment {
-    @PrimaryGeneratedColumn('increment')
-    id: number
+	@PrimaryGeneratedColumn("increment")
+	id: number;
 
-    @Column({type: "varchar", length: 600})
-    text: string
+	@Column({ type: "varchar", length: 600 })
+	text: string;
 
-    @CreateDateColumn({ type: "date" })
-	created_at: string
+	@CreateDateColumn({ type: "date" })
+	created_at: string;
 
-    @ManyToOne(() => User)
-    user: User
+	@ManyToOne(() => User)
+	user: User;
 
-    @ManyToOne(() => Poster, { onDelete: "CASCADE" })
-    poster: Poster
-
+	@ManyToOne(() => Poster, { onDelete: "CASCADE" })
+	poster: Poster;
 }
 
-
-export { Comment }
+export { Comment };

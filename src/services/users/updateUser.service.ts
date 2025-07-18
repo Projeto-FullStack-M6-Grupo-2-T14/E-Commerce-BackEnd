@@ -1,11 +1,17 @@
 import { Repository } from "typeorm";
-import { User } from "../../entities";
-import { AppDataSource } from "../../data-source";
-import { AppError } from "../../error";
-import { userResponse } from "../../schemas/users.schema";
-import { TUpdateUserResponse, TUserPartial } from "../../interfaces/users.interface";
+import { User } from "../../entities.js";
+import { AppDataSource } from "../../data-source.js";
+import { AppError } from "../../error.js";
+import { userResponse } from "../../schemas/users.schema.js";
+import {
+	TUpdateUserResponse,
+	TUserPartial,
+} from "../../interfaces/users.interface.js";
 
-export const updateUserServices = async ( payload: TUserPartial, userId: number ): Promise<TUpdateUserResponse> => {
+export const updateUserServices = async (
+	payload: TUserPartial,
+	userId: number
+): Promise<TUpdateUserResponse> => {
 	const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
 	const user: User | null = await userRepository.findOneBy({ id: userId });

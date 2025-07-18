@@ -1,29 +1,33 @@
-import { Repository } from 'typeorm';
-import { Comment, Poster } from '../../entities';
-import { AppDataSource } from '../../data-source';
-import { TListComments } from '../../interfaces/comment.interfaces';
-import { commentSchemaResponseList } from '../../schemas/comments.schema';
-import { AppError } from '../../error';
+import { Repository } from "typeorm";
+import { Comment, Poster } from "../../entities.js";
+import { AppDataSource } from "../../data-source.js";
+import { TListComments } from "../../interfaces/comment.interfaces.js";
+import { commentSchemaResponseList } from "../../schemas/comments.schema.js";
+import { AppError } from "../../error.js";
 
-const listCommentsService = async (posterId: number): Promise<TListComments> => {
+const listCommentsService = async (
+	posterId: number
+): Promise<TListComments> => {
+	const commentRepository: Repository<Comment> =
+		AppDataSource.getRepository(Comment);
+	const posterRepository: Repository<Poster> =
+		AppDataSource.getRepository(Poster);
 
-    const commentRepository: Repository<Comment> = AppDataSource.getRepository(Comment)
-    const posterRepository: Repository<Poster> = AppDataSource.getRepository(Poster)
+	const poster = await posterRepository.findOneBy({ id: posterId });
+	if (!poster) {
+		throw new AppError("Poster not found", 404);
+	}
 
-    const poster = await posterRepository.findOneBy({ id: posterId });
-    if (!poster) {
-        throw new AppError('Poster not found', 404);
-    }
+	const comments: Comment[] = await commentRepository
+		.createQueryBuilder("comment")
+		.leftJoinAndSelect("comment.user", "user")
+		.where("comment.posterId = :posterId", { posterId })
+		.getMany();
 
-    const comments: Comment[] = await commentRepository
-    .createQueryBuilder('comment')
-    .leftJoinAndSelect('comment.user', 'user')
-    .where('comment.posterId = :posterId', { posterId })
-    .getMany();
+	const returnComments: TListComments =
+		commentSchemaResponseList.parse(comments);
 
-    const returnComments: TListComments = commentSchemaResponseList.parse(comments);
-
-    return returnComments;
+	return returnComments;
 };
 
 export default listCommentsService;
